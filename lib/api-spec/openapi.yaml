@@ -3,13 +3,17 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: API specification for Destination Dreams Wedding Website
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: rsvp
+    description: RSVP operations
+  - name: config
+    description: Wedding configuration
 paths:
   /healthz:
     get:
@@ -24,6 +28,69 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /rsvp:
+    get:
+      operationId: listRsvps
+      tags: [rsvp]
+      summary: List all RSVPs
+      description: Returns all RSVP submissions
+      responses:
+        "200":
+          description: List of RSVPs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Rsvp"
+    post:
+      operationId: createRsvp
+      tags: [rsvp]
+      summary: Submit RSVP
+      description: Submit a new RSVP response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRsvpBody"
+      responses:
+        "201":
+          description: RSVP submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rsvp"
+
+  /rsvp/stats:
+    get:
+      operationId: getRsvpStats
+      tags: [rsvp]
+      summary: Get RSVP stats
+      description: Returns summary counts of RSVP responses
+      responses:
+        "200":
+          description: RSVP stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RsvpStats"
+
+  /config:
+    get:
+      operationId: getWeddingConfig
+      tags: [config]
+      summary: Get wedding configuration
+      description: Returns wedding details like couple names, date, venue, itinerary, etc.
+      responses:
+        "200":
+          description: Wedding config
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WeddingConfig"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +101,260 @@ components:
       required:
         - status
 
+    Rsvp:
+      type: object
+      properties:
+        id:
+          type: integer
+        guestName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        numberOfGuests:
+          type: integer
+        attendanceStatus:
+          type: string
+          enum: [attending, not_sure, not_attending]
+        needsTravelHelp:
+          type: boolean
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - guestName
+        - attendanceStatus
+        - createdAt
+
+    CreateRsvpBody:
+      type: object
+      properties:
+        guestName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        numberOfGuests:
+          type: integer
+        attendanceStatus:
+          type: string
+          enum: [attending, not_sure, not_attending]
+        needsTravelHelp:
+          type: boolean
+        message:
+          type: string
+      required:
+        - guestName
+        - attendanceStatus
+
+    RsvpStats:
+      type: object
+      properties:
+        total:
+          type: integer
+        attending:
+          type: integer
+        notSure:
+          type: integer
+        notAttending:
+          type: integer
+        totalGuests:
+          type: integer
+      required:
+        - total
+        - attending
+        - notSure
+        - notAttending
+        - totalGuests
+
+    WeddingConfig:
+      type: object
+      properties:
+        coupleName:
+          type: string
+        brideName:
+          type: string
+        groomName:
+          type: string
+        weddingDate:
+          type: string
+        weddingDateTime:
+          type: string
+          format: date-time
+        destination:
+          type: string
+        venue:
+          type: string
+        tagline:
+          type: string
+        story:
+          type: string
+        destinationDescription:
+          type: string
+        destinationFacts:
+          type: array
+          items:
+            type: string
+        googleMapsUrl:
+          type: string
+        airport:
+          $ref: "#/components/schemas/AirportInfo"
+        hotels:
+          type: array
+          items:
+            $ref: "#/components/schemas/HotelInfo"
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/EventInfo"
+        localExperiences:
+          type: array
+          items:
+            $ref: "#/components/schemas/LocalExperience"
+        faqs:
+          type: array
+          items:
+            $ref: "#/components/schemas/FaqItem"
+        contacts:
+          type: array
+          items:
+            $ref: "#/components/schemas/ContactInfo"
+        gallery:
+          type: array
+          items:
+            type: string
+      required:
+        - coupleName
+        - brideName
+        - groomName
+        - weddingDate
+        - weddingDateTime
+        - destination
+        - venue
+        - tagline
+        - story
+        - destinationDescription
+        - destinationFacts
+        - googleMapsUrl
+        - airport
+        - hotels
+        - events
+        - localExperiences
+        - faqs
+        - contacts
+        - gallery
+
+    AirportInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+        travelTime:
+          type: string
+        transferInfo:
+          type: string
+      required:
+        - name
+        - code
+        - travelTime
+
+    HotelInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum: [primary, alternate]
+        groupCode:
+          type: string
+        bookingUrl:
+          type: string
+        checkIn:
+          type: string
+        checkOut:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+        - type
+        - checkIn
+        - checkOut
+        - description
+
+    EventInfo:
+      type: object
+      properties:
+        day:
+          type: integer
+        name:
+          type: string
+        date:
+          type: string
+        time:
+          type: string
+        venue:
+          type: string
+        dressCode:
+          type: string
+        description:
+          type: string
+      required:
+        - day
+        - name
+        - date
+        - time
+        - venue
+        - dressCode
+
+    LocalExperience:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        distanceFromHotel:
+          type: string
+        category:
+          type: string
+      required:
+        - name
+        - description
+        - distanceFromHotel
+        - category
+
+    FaqItem:
+      type: object
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+      required:
+        - question
+        - answer
+
+    ContactInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        relation:
+          type: string
+        phone:
+          type: string
+        whatsappUrl:
+          type: string
+      required:
+        - name
+        - relation
+        - phone
