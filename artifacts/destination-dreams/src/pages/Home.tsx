@@ -17,7 +17,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function Home() {
   const { data: config, isLoading } = useGetWeddingConfig();
   const [introComplete, setIntroComplete] = useState(false);
-  const [showSite, setShowSite] = useState(false);
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -25,24 +25,15 @@ export default function Home() {
 
   const handleIntroComplete = () => {
     setIntroComplete(true);
-    // slight delay so the welcome screen fades out gracefully
-    setTimeout(() => setShowSite(true), 150);
+    setTimeout(() => setShowContent(true), 100);
   };
 
   if (isLoading || !config) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-6">
-          <div
-            className="w-14 h-14 rounded-full border-2 border-t-transparent animate-spin"
-            style={{ borderColor: "hsl(42 85% 52%)", borderTopColor: "transparent" }}
-          />
-          <p
-            className="text-2xl tracking-widest"
-            style={{ fontFamily: "'Cormorant Garamond', serif", color: "hsl(42 85% 52%)" }}
-          >
-            Unfolding Magic...
-          </p>
+          <div className="w-16 h-16 rounded-full border-4 border-primary border-t-transparent animate-spin" />
+          <p className="font-serif text-2xl tracking-widest text-primary">Unfolding Magic...</p>
         </div>
       </div>
     );
@@ -50,35 +41,22 @@ export default function Home() {
 
   return (
     <>
-      {/* Envelope + Welcome intro — unmounted once user clicks Begin */}
-      <AnimatePresence>
-        {!introComplete && (
-          <motion.div
-            className="fixed inset-0 z-[9999]"
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
-          >
-            <EnvelopeIntro
-              coupleName={config.coupleName}
-              brideName={config.brideName}
-              groomName={config.groomName}
-              weddingDate={config.weddingDate}
-              destination={config.destination}
-              tagline={config.tagline}
-              onComplete={handleIntroComplete}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {!introComplete && (
+        <EnvelopeIntro
+          coupleName={config.coupleName}
+          weddingDate={config.weddingDate}
+          destination={config.destination}
+          onComplete={handleIntroComplete}
+        />
+      )}
 
-      {/* Main website — fades in after Begin is clicked */}
       <AnimatePresence>
-        {showSite && (
+        {showContent && (
           <motion.div
             className="bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground overflow-x-hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.0, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 1.03 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
           >
             <Navigation coupleName={config.coupleName} />
 
