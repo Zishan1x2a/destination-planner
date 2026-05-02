@@ -7,10 +7,13 @@ import { StorySection } from '../components/StorySection';
 import { DestinationSection } from '../components/DestinationSection';
 import { TravelSection } from '../components/TravelSection';
 import { ItinerarySection } from '../components/ItinerarySection';
+import { FamilySection } from '../components/FamilySection';
 import { ExperiencesSection } from '../components/ExperiencesSection';
 import { GallerySection } from '../components/GallerySection';
+import { BlessingSection } from '../components/BlessingSection';
 import { CountdownSection } from '../components/CountdownSection';
 import { FaqSection } from '../components/FaqSection';
+import { AcceptInvitationSection } from '../components/AcceptInvitationSection';
 import { RsvpSection } from '../components/RsvpSection';
 import { EnvelopeIntro } from '../components/EnvelopeIntro';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -77,27 +80,44 @@ export default function Home() {
             {/* 3 — Love Story */}
             <StorySection story={config.story} />
 
+            {/* 4 — Destination */}
             <DestinationSection
               description={config.destinationDescription}
               facts={config.destinationFacts}
               googleMapsUrl={config.googleMapsUrl}
             />
 
+            {/* 5 — Travel */}
             <TravelSection
               airport={config.airport}
               hotels={config.hotels}
             />
 
+            {/* 6 — Itinerary / Events */}
             <ItinerarySection events={config.events} />
 
+            {/* 7 — Family (new) */}
+            <FamilySection />
+
+            {/* 8 — Experiences */}
             <ExperiencesSection experiences={config.localExperiences} />
 
+            {/* 9 — Gallery */}
             <GallerySection gallery={config.gallery} />
 
+            {/* 10 — Blessings (new) */}
+            <BlessingSection />
+
+            {/* 11 — Countdown */}
             <CountdownSection targetDate={config.weddingDateTime} />
 
+            {/* 12 — FAQ */}
             <FaqSection faqs={config.faqs} />
 
+            {/* 13 — Accept Invitation (new) */}
+            <AcceptInvitationSection />
+
+            {/* 14 — Full RSVP form */}
             <RsvpSection contacts={config.contacts} />
           </motion.div>
         )}
