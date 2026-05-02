@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Destination Dreams – Wedding Invitation"
+version = "1.0.0"
+id = "artifacts/destination-dreams"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20374
+
+[services.development]
+run = "pnpm --filter @workspace/destination-dreams run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/destination-dreams", "run", "build" ]
+publicDir = "artifacts/destination-dreams/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20374"
+BASE_PATH = "/"
