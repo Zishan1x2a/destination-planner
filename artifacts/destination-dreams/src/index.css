@@ -75,38 +75,38 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: 25 30% 8%;
-  --foreground: 40 60% 92%;
-  --card: 25 25% 12%;
-  --card-foreground: 40 60% 92%;
-  --card-border: 30 20% 18%;
-  --border: 30 20% 18%;
-  --input: 30 20% 18%;
-  --primary: 42 85% 52%;
-  --primary-foreground: 25 30% 8%;
-  --secondary: 350 60% 28%;
-  --secondary-foreground: 40 60% 92%;
-  --muted: 30 15% 20%;
-  --muted-foreground: 35 25% 60%;
-  --accent: 15 70% 55%;
-  --accent-foreground: 40 60% 92%;
+  --background: 30 35% 8%;
+  --foreground: 42 50% 92%;
+  --card: 38 45% 94%;
+  --card-foreground: 20 30% 15%;
+  --card-border: 42 70% 45%;
+  --border: 42 60% 35%;
+  --input: 38 30% 88%;
+  --primary: 42 85% 48%;
+  --primary-foreground: 20 30% 12%;
+  --secondary: 350 55% 32%;
+  --secondary-foreground: 42 50% 92%;
+  --muted: 36 20% 85%;
+  --muted-foreground: 25 20% 45%;
+  --accent: 22 70% 52%;
+  --accent-foreground: 20 30% 12%;
   --destructive: 0 70% 50%;
   --destructive-foreground: 40 60% 92%;
-  --ring: 42 85% 52%;
-  --popover: 25 25% 12%;
-  --popover-foreground: 40 60% 92%;
-  --popover-border: 30 20% 18%;
-  --sidebar: 25 25% 12%;
-  --sidebar-foreground: 40 60% 92%;
-  --sidebar-border: 30 20% 18%;
-  --sidebar-primary: 42 85% 52%;
-  --sidebar-primary-foreground: 25 30% 8%;
-  --sidebar-accent: 350 60% 28%;
-  --sidebar-accent-foreground: 40 60% 92%;
-  --sidebar-ring: 42 85% 52%;
-  --chart-1: 42 85% 52%;
-  --chart-2: 350 60% 28%;
-  --chart-3: 15 70% 55%;
+  --ring: 42 85% 48%;
+  --popover: 38 45% 94%;
+  --popover-foreground: 20 30% 15%;
+  --popover-border: 42 70% 45%;
+  --sidebar: 38 45% 94%;
+  --sidebar-foreground: 20 30% 15%;
+  --sidebar-border: 42 70% 45%;
+  --sidebar-primary: 42 85% 48%;
+  --sidebar-primary-foreground: 20 30% 12%;
+  --sidebar-accent: 350 55% 32%;
+  --sidebar-accent-foreground: 42 50% 92%;
+  --sidebar-ring: 42 85% 48%;
+  --chart-1: 42 85% 48%;
+  --chart-2: 350 55% 32%;
+  --chart-3: 22 70% 52%;
   --chart-4: 190 60% 45%;
   --chart-5: 280 50% 55%;
 
@@ -133,5 +133,19 @@
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
+  }
+  
+  .invitation-card {
+    background: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+    border: 1.5px solid hsl(var(--card-border));
+    position: relative;
+  }
+  .invitation-card::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 0.5px solid hsl(var(--card-border) / 0.5);
+    pointer-events: none;
   }
 }

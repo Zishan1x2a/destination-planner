@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { InvitationBorder, SectionHeader } from '@/components/OrnamentalElements';
 
 interface StorySectionProps {
   story: string;
@@ -8,26 +9,41 @@ interface StorySectionProps {
 export function StorySection({ story }: StorySectionProps) {
   return (
     <section id="story" className="py-32 px-6 bg-background relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
-      
-      <div className="max-w-4xl mx-auto text-center relative z-10">
+      <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <span className="text-primary font-medium tracking-[0.2em] uppercase text-sm mb-4 block">How it began</span>
-          <h2 className="font-serif text-5xl md:text-6xl text-foreground mb-12">Our Story</h2>
-          
-          <div className="relative">
-            <div className="absolute -top-10 left-0 text-9xl text-primary/10 font-serif opacity-50">"</div>
-            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground font-light text-justify relative z-10 px-4 md:px-10">
-              {story}
-            </p>
-            <div className="absolute -bottom-16 right-0 text-9xl text-primary/10 font-serif opacity-50 rotate-180">"</div>
-          </div>
+          <InvitationBorder className="invitation-card overflow-hidden">
+            {/* Damask pattern background */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
+              backgroundImage: 'radial-gradient(hsl(var(--card-foreground)) 2px, transparent 2px), radial-gradient(hsl(var(--card-foreground)) 2px, transparent 2px)',
+              backgroundSize: '40px 40px',
+              backgroundPosition: '0 0, 20px 20px'
+            }} />
+            
+            <div className="relative z-10">
+              <SectionHeader label="How It Began" subLabel="Our Story" />
+              
+              <div className="relative px-8 md:px-16 py-8">
+                {/* Decorative open quote */}
+                <svg className="absolute top-0 left-0 w-12 h-12 text-primary/30" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+                
+                <p className="text-xl md:text-2xl leading-relaxed text-card-foreground font-serif italic text-justify relative z-10">
+                  {story}
+                </p>
+                
+                {/* Decorative close quote */}
+                <svg className="absolute bottom-0 right-0 w-12 h-12 text-primary/30 rotate-180" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+              </div>
+            </div>
+          </InvitationBorder>
         </motion.div>
       </div>
     </section>
