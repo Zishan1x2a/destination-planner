@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useGetWeddingConfig } from '@workspace/api-client-react';
 import { Navigation } from '../components/Navigation';
 import { HeroSection } from '../components/HeroSection';
+import { CoupleRevealSection } from '../components/CoupleRevealSection';
 import { StorySection } from '../components/StorySection';
 import { DestinationSection } from '../components/DestinationSection';
 import { TravelSection } from '../components/TravelSection';
@@ -60,12 +61,20 @@ export default function Home() {
           >
             <Navigation coupleName={config.coupleName} />
 
+            {/* 1 — Welcome / Invitation Hero */}
             <HeroSection
               coupleName={config.coupleName}
               weddingDate={config.weddingDate}
               destination={config.destination}
             />
 
+            {/* 2 — Cinematic Couple Reveal */}
+            <CoupleRevealSection
+              brideName={config.brideName}
+              groomName={config.groomName}
+            />
+
+            {/* 3 — Love Story */}
             <StorySection story={config.story} />
 
             <DestinationSection
