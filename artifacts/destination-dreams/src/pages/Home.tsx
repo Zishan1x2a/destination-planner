@@ -12,7 +12,6 @@ import { FamilySection } from '../components/FamilySection';
 import { GallerySection } from '../components/GallerySection';
 import { BlessingSection } from '../components/BlessingSection';
 import { CountdownSection } from '../components/CountdownSection';
-import { FaqSection } from '../components/FaqSection';
 import { AcceptInvitationSection } from '../components/AcceptInvitationSection';
 import { ContactSection } from '../components/ContactSection';
 import { EnvelopeIntro } from '../components/EnvelopeIntro';
@@ -118,11 +117,7 @@ export default function Home() {
             <CountdownSection targetDate={config.weddingDateTime} />
             <AnimatedSectionDivider />
 
-            {/* 12 — FAQ */}
-            <FaqSection faqs={config.faqs} />
-            <AnimatedSectionDivider />
-
-            {/* 13 — Accept Invitation */}
+            {/* 12 — Accept Invitation */}
             <AcceptInvitationSection />
             <AnimatedSectionDivider />
 
