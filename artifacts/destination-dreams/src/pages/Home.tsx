@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useGetWeddingConfig } from '@workspace/api-client-react';
 import { Navigation } from '../components/Navigation';
+import { AnimatedSectionDivider } from '../components/OrnamentalElements';
 import { HeroSection } from '../components/HeroSection';
 import { CoupleRevealSection } from '../components/CoupleRevealSection';
 import { StorySection } from '../components/StorySection';
@@ -70,15 +71,18 @@ export default function Home() {
               weddingDate={config.weddingDate}
               destination={config.destination}
             />
+            <AnimatedSectionDivider />
 
             {/* 2 — Cinematic Couple Reveal */}
             <CoupleRevealSection
               brideName={config.brideName}
               groomName={config.groomName}
             />
+            <AnimatedSectionDivider />
 
             {/* 3 — Love Story */}
             <StorySection story={config.story} />
+            <AnimatedSectionDivider />
 
             {/* 4 — Destination */}
             <DestinationSection
@@ -86,36 +90,46 @@ export default function Home() {
               facts={config.destinationFacts}
               googleMapsUrl={config.googleMapsUrl}
             />
+            <AnimatedSectionDivider />
 
             {/* 5 — Travel */}
             <TravelSection
               airport={config.airport}
               hotels={config.hotels}
             />
+            <AnimatedSectionDivider />
 
             {/* 6 — Itinerary / Events */}
             <ItinerarySection events={config.events} />
+            <AnimatedSectionDivider />
 
             {/* 7 — Family (new) */}
             <FamilySection />
+            <AnimatedSectionDivider />
 
             {/* 8 — Experiences */}
             <ExperiencesSection experiences={config.localExperiences} />
+            <AnimatedSectionDivider />
 
             {/* 9 — Gallery */}
             <GallerySection gallery={config.gallery} />
+            <AnimatedSectionDivider />
 
             {/* 10 — Blessings (new) */}
             <BlessingSection />
+            <AnimatedSectionDivider />
 
             {/* 11 — Countdown */}
             <CountdownSection targetDate={config.weddingDateTime} />
+            <AnimatedSectionDivider />
 
             {/* 12 — FAQ */}
             <FaqSection faqs={config.faqs} />
+            <AnimatedSectionDivider />
 
             {/* 13 — Accept Invitation (new) */}
             <AcceptInvitationSection />
+            <AnimatedSectionDivider />
 
             {/* 14 — Full RSVP form */}
             <RsvpSection contacts={config.contacts} />

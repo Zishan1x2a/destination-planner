@@ -1,4 +1,68 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+
+export function AnimatedSectionDivider() {
+  return (
+    <div
+      className="relative flex flex-col items-center w-full overflow-visible"
+      style={{ height: 72, background: "transparent" }}
+    >
+      {/* Left horizontal rule */}
+      <div className="absolute top-1/2 left-0 right-0 flex items-center px-6" style={{ transform: "translateY(-50%)" }}>
+        <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, hsl(42 70% 50% / 0.35))" }} />
+        <div className="mx-4 flex items-center gap-2">
+          <div className="w-1 h-1 rounded-full" style={{ background: "hsl(42 80% 55% / 0.4)" }} />
+          <div className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(42 80% 55% / 0.25)" }} />
+        </div>
+
+        {/* Center bouncing ornament */}
+        <motion.div
+          className="relative flex flex-col items-center"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          {/* Glow pulse behind ornament */}
+          <motion.div
+            className="absolute inset-0 rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, hsl(42 85% 55% / 0.18) 0%, transparent 70%)", width: 60, height: 60, top: -10, left: -10 }}
+            animate={{ scale: [1, 1.4, 1], opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            {/* Outer ring */}
+            <motion.circle
+              cx="20" cy="20" r="18"
+              stroke="hsl(42,75%,52%)"
+              strokeWidth="0.8"
+              strokeDasharray="3 4"
+              opacity="0.45"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+              style={{ transformOrigin: "20px 20px" }}
+            />
+            {/* Inner ring */}
+            <circle cx="20" cy="20" r="12" stroke="hsl(42,70%,50%)" strokeWidth="0.6" opacity="0.3" />
+            {/* 8-point star */}
+            <path
+              d="M20,6 L21.8,17 L32,12 L24,20 L32,28 L21.8,23 L20,34 L18.2,23 L8,28 L16,20 L8,12 L18.2,17 Z"
+              fill="hsl(42,82%,58%)"
+              opacity="0.85"
+            />
+            {/* Center dot */}
+            <circle cx="20" cy="20" r="3" fill="hsl(42,90%,70%)" opacity="0.9" />
+          </svg>
+        </motion.div>
+
+        <div className="mx-4 flex items-center gap-2">
+          <div className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(42 80% 55% / 0.25)" }} />
+          <div className="w-1 h-1 rounded-full" style={{ background: "hsl(42 80% 55% / 0.4)" }} />
+        </div>
+        <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, hsl(42 70% 50% / 0.35))" }} />
+      </div>
+    </div>
+  );
+}
 
 export function CornerOrnament({ position = "tl", size = 64, color = "currentColor" }: { position?: "tl" | "tr" | "bl" | "br", size?: number, color?: string }) {
   const rotation = {
