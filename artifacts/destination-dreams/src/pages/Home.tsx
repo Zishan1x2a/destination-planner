@@ -11,7 +11,6 @@ import { ItinerarySection } from '../components/ItinerarySection';
 import { FamilySection } from '../components/FamilySection';
 import { GallerySection } from '../components/GallerySection';
 import { BlessingSection } from '../components/BlessingSection';
-import { CountdownSection } from '../components/CountdownSection';
 import { AcceptInvitationSection } from '../components/AcceptInvitationSection';
 import { ContactSection } from '../components/ContactSection';
 import { EnvelopeIntro } from '../components/EnvelopeIntro';
@@ -113,11 +112,7 @@ export default function Home() {
             <BlessingSection />
             <AnimatedSectionDivider />
 
-            {/* 11 — Countdown */}
-            <CountdownSection targetDate={config.weddingDateTime} />
-            <AnimatedSectionDivider />
-
-            {/* 12 — Accept Invitation */}
+            {/* 11 — Accept Invitation */}
             <AcceptInvitationSection />
             <AnimatedSectionDivider />
 
