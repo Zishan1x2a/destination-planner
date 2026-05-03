@@ -9,7 +9,6 @@ import { DestinationSection } from '../components/DestinationSection';
 import { TravelSection } from '../components/TravelSection';
 import { ItinerarySection } from '../components/ItinerarySection';
 import { FamilySection } from '../components/FamilySection';
-import { ExperiencesSection } from '../components/ExperiencesSection';
 import { GallerySection } from '../components/GallerySection';
 import { BlessingSection } from '../components/BlessingSection';
 import { CountdownSection } from '../components/CountdownSection';
@@ -106,11 +105,7 @@ export default function Home() {
             <FamilySection />
             <AnimatedSectionDivider />
 
-            {/* 8 — Experiences */}
-            <ExperiencesSection experiences={config.localExperiences} />
-            <AnimatedSectionDivider />
-
-            {/* 9 — Gallery */}
+            {/* 8 — Gallery */}
             <GallerySection gallery={config.gallery} />
             <AnimatedSectionDivider />
 
