@@ -367,7 +367,7 @@ export function AcceptInvitationSection() {
           </div>
         </motion.div>
 
-        {/* Scroll down to RSVP hint */}
+        {/* Scroll down to Contact hint */}
         {!accepted && (
           <motion.div
             className="text-center mt-12"
@@ -376,13 +376,13 @@ export function AcceptInvitationSection() {
             transition={{ delay: 1.5 }}
           >
             <motion.a
-              href="#rsvp"
+              href="#contact"
               className="flex flex-col items-center gap-2"
               style={{ color: "hsl(42 65% 55% / 0.5)" }}
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2.4, repeat: Infinity }}
             >
-              <span className="uppercase tracking-[0.3em] text-xs font-sans">Full RSVP below</span>
+              <span className="uppercase tracking-[0.3em] text-xs font-sans">Have questions? Contact us</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M10 3L10 17M4 11L10 17L16 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
               </svg>

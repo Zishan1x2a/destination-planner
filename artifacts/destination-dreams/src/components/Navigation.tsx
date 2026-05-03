@@ -18,7 +18,8 @@ export function Navigation({ coupleName }: NavigationProps) {
     { href: '#destination', label: 'Destination' },
     { href: '#travel', label: 'Travel' },
     { href: '#itinerary', label: 'Itinerary' },
-    { href: '#accept', label: 'Accept' }
+    { href: '#accept', label: 'Accept' },
+    { href: '#contact', label: 'Contact' }
   ];
 
   useEffect(() => {
