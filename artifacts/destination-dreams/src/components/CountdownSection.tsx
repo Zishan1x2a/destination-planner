@@ -40,7 +40,7 @@ export function CountdownSection({ targetDate }: CountdownSectionProps) {
   }, [targetDate]);
 
   return (
-    <section className="py-32 px-6 bg-background relative overflow-hidden flex justify-center">
+    <section className="py-32 px-6 luxury-bg relative overflow-hidden flex justify-center">
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541845157-a6d2d100c931?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-5 mix-blend-overlay pointer-events-none" />
       
       <motion.div

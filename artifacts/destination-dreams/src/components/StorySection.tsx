@@ -8,7 +8,7 @@ interface StorySectionProps {
 
 export function StorySection({ story }: StorySectionProps) {
   return (
-    <section id="story" className="py-32 px-6 bg-background relative overflow-hidden">
+    <section id="story" className="py-32 px-6 luxury-bg relative overflow-hidden">
       <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

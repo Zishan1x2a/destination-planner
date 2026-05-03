@@ -15,7 +15,7 @@ interface FaqSectionProps {
 
 export function FaqSection({ faqs }: FaqSectionProps) {
   return (
-    <section id="faq" className="py-32 px-6 bg-background relative">
+    <section id="faq" className="py-32 px-6 luxury-bg relative">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

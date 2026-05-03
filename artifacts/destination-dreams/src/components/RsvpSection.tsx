@@ -81,7 +81,7 @@ export function RsvpSection({ contacts }: RsvpSectionProps) {
   };
 
   return (
-    <section id="rsvp" className="py-32 px-6 bg-background relative overflow-hidden">
+    <section id="rsvp" className="py-32 px-6 luxury-bg relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           
