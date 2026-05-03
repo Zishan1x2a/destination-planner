@@ -19,7 +19,7 @@ export function Navigation({ coupleName }: NavigationProps) {
     { href: '#travel', label: 'Travel' },
     { href: '#itinerary', label: 'Itinerary' },
     { href: '#experiences', label: 'Experiences' },
-    { href: '#rsvp', label: 'RSVP' }
+    { href: '#accept', label: 'Accept' }
   ];
 
   useEffect(() => {

@@ -15,7 +15,6 @@ import { BlessingSection } from '../components/BlessingSection';
 import { CountdownSection } from '../components/CountdownSection';
 import { FaqSection } from '../components/FaqSection';
 import { AcceptInvitationSection } from '../components/AcceptInvitationSection';
-import { RsvpSection } from '../components/RsvpSection';
 import { EnvelopeIntro } from '../components/EnvelopeIntro';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -127,12 +126,8 @@ export default function Home() {
             <FaqSection faqs={config.faqs} />
             <AnimatedSectionDivider />
 
-            {/* 13 — Accept Invitation (new) */}
+            {/* 13 — Accept Invitation */}
             <AcceptInvitationSection />
-            <AnimatedSectionDivider />
-
-            {/* 14 — Full RSVP form */}
-            <RsvpSection contacts={config.contacts} />
           </motion.div>
         )}
       </AnimatePresence>
