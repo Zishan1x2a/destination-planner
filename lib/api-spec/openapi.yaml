@@ -77,6 +77,40 @@ paths:
               schema:
                 $ref: "#/components/schemas/RsvpStats"
 
+  /blessings:
+    get:
+      operationId: listBlessings
+      tags: [blessings]
+      summary: List all blessings
+      description: Returns all guest blessing messages
+      responses:
+        "200":
+          description: List of blessings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Blessing"
+    post:
+      operationId: createBlessing
+      tags: [blessings]
+      summary: Submit a blessing
+      description: Submit a new blessing message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBlessingBody"
+      responses:
+        "201":
+          description: Blessing submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Blessing"
+
   /config:
     get:
       operationId: getWeddingConfig
@@ -342,6 +376,35 @@ components:
       required:
         - question
         - answer
+
+    Blessing:
+      type: object
+      properties:
+        id:
+          type: integer
+        guestName:
+          type: string
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - guestName
+        - message
+        - createdAt
+
+    CreateBlessingBody:
+      type: object
+      properties:
+        guestName:
+          type: string
+        message:
+          type: string
+      required:
+        - guestName
+        - message
 
     ContactInfo:
       type: object

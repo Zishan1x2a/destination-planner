@@ -59,6 +59,27 @@ export const GetRsvpStatsResponse = zod.object({
 });
 
 /**
+ * Returns all guest blessing messages
+ * @summary List all blessings
+ */
+export const ListBlessingsResponseItem = zod.object({
+  id: zod.number(),
+  guestName: zod.string(),
+  message: zod.string(),
+  createdAt: zod.coerce.date(),
+});
+export const ListBlessingsResponse = zod.array(ListBlessingsResponseItem);
+
+/**
+ * Submit a new blessing message
+ * @summary Submit a blessing
+ */
+export const CreateBlessingBody = zod.object({
+  guestName: zod.string(),
+  message: zod.string(),
+});
+
+/**
  * Returns wedding details like couple names, date, venue, itinerary, etc.
  * @summary Get wedding configuration
  */

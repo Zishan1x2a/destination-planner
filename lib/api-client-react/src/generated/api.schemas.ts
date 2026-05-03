@@ -131,3 +131,15 @@ export interface WeddingConfig {
   contacts: ContactInfo[];
   gallery: string[];
 }
+
+export interface Blessing {
+  id: number;
+  guestName: string;
+  message: string;
+  createdAt: string;
+}
+
+export interface CreateBlessingBody {
+  guestName: string;
+  message: string;
+}

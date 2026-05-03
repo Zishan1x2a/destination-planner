@@ -17,6 +17,8 @@ import type {
 } from "@tanstack/react-query";
 
 import type {
+  Blessing,
+  CreateBlessingBody,
   CreateRsvpBody,
   HealthStatus,
   Rsvp,
@@ -337,6 +339,169 @@ export function useGetRsvpStats<
 
   return { ...query, queryKey: queryOptions.queryKey };
 }
+
+/**
+ * Returns all guest blessing messages
+ * @summary List all blessings
+ */
+export const getListBlessingsUrl = () => {
+  return `/api/blessings`;
+};
+
+export const listBlessings = async (
+  options?: RequestInit,
+): Promise<Blessing[]> => {
+  return customFetch<Blessing[]>(getListBlessingsUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getListBlessingsQueryKey = () => {
+  return [`/api/blessings`] as const;
+};
+
+export const getListBlessingsQueryOptions = <
+  TData = Awaited<ReturnType<typeof listBlessings>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof listBlessings>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getListBlessingsQueryKey();
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof listBlessings>>> = ({
+    signal,
+  }) => listBlessings({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof listBlessings>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type ListBlessingsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof listBlessings>>
+>;
+export type ListBlessingsQueryError = ErrorType<unknown>;
+
+/**
+ * @summary List all blessings
+ */
+
+export function useListBlessings<
+  TData = Awaited<ReturnType<typeof listBlessings>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof listBlessings>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getListBlessingsQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * Submit a new blessing message
+ * @summary Submit a blessing
+ */
+export const getCreateBlessingUrl = () => {
+  return `/api/blessings`;
+};
+
+export const createBlessing = async (
+  createBlessingBody: CreateBlessingBody,
+  options?: RequestInit,
+): Promise<Blessing> => {
+  return customFetch<Blessing>(getCreateBlessingUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(createBlessingBody),
+  });
+};
+
+export const getCreateBlessingMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createBlessing>>,
+    TError,
+    { data: BodyType<CreateBlessingBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createBlessing>>,
+  TError,
+  { data: BodyType<CreateBlessingBody> },
+  TContext
+> => {
+  const mutationKey = ["createBlessing"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createBlessing>>,
+    { data: BodyType<CreateBlessingBody> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createBlessing(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateBlessingMutationResult = NonNullable<
+  Awaited<ReturnType<typeof createBlessing>>
+>;
+export type CreateBlessingMutationBody = BodyType<CreateBlessingBody>;
+export type CreateBlessingMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Submit a blessing
+ */
+export const useCreateBlessing = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createBlessing>>,
+    TError,
+    { data: BodyType<CreateBlessingBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof createBlessing>>,
+  TError,
+  { data: BodyType<CreateBlessingBody> },
+  TContext
+> => {
+  return useMutation(getCreateBlessingMutationOptions(options));
+};
 
 /**
  * Returns wedding details like couple names, date, venue, itinerary, etc.
