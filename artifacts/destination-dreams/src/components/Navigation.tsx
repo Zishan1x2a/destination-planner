@@ -16,7 +16,6 @@ export function Navigation({ coupleName }: NavigationProps) {
     { href: '#hero', label: 'Home' },
     { href: '#story', label: 'Story' },
     { href: '#destination', label: 'Destination' },
-    { href: '#travel', label: 'Travel' },
     { href: '#itinerary', label: 'Itinerary' },
     { href: '#accept', label: 'Accept' },
     { href: '#contact', label: 'Contact' }

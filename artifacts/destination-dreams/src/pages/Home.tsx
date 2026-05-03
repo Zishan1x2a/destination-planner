@@ -6,7 +6,6 @@ import { HeroSection } from '../components/HeroSection';
 import { CoupleRevealSection } from '../components/CoupleRevealSection';
 import { StorySection } from '../components/StorySection';
 import { DestinationSection } from '../components/DestinationSection';
-import { TravelSection } from '../components/TravelSection';
 import { ItinerarySection } from '../components/ItinerarySection';
 import { FamilySection } from '../components/FamilySection';
 import { GallerySection } from '../components/GallerySection';
@@ -89,12 +88,6 @@ export default function Home() {
             />
             <AnimatedSectionDivider />
 
-            {/* 5 — Travel */}
-            <TravelSection
-              airport={config.airport}
-              hotels={config.hotels}
-            />
-            <AnimatedSectionDivider />
 
             {/* 6 — Itinerary / Events */}
             <ItinerarySection events={config.events} />
