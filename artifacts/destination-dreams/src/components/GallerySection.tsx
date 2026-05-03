@@ -8,7 +8,7 @@ interface GallerySectionProps {
 
 export function GallerySection({ gallery }: GallerySectionProps) {
   return (
-    <section id="gallery" className="py-32 px-6 luxury-bg relative">
+    <section id="gallery" className="py-32 px-6 bg-background relative">
       <div className="max-w-7xl mx-auto">
         <SectionHeader label="Moments" subLabel="Gallery" />
 

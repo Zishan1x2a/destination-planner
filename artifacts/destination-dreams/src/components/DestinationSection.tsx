@@ -12,7 +12,7 @@ interface DestinationSectionProps {
 
 export function DestinationSection({ description, facts, googleMapsUrl }: DestinationSectionProps) {
   return (
-    <section id="destination" className="py-32 px-6 luxury-bg relative">
+    <section id="destination" className="py-32 px-6 bg-background relative">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

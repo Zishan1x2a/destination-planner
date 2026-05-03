@@ -11,7 +11,7 @@ interface TravelSectionProps {
 
 export function TravelSection({ airport, hotels }: TravelSectionProps) {
   return (
-    <section id="travel" className="py-32 px-6 luxury-bg relative">
+    <section id="travel" className="py-32 px-6 bg-background relative">
       <div className="max-w-6xl mx-auto">
         <SectionHeader label="Travel & Stay" subLabel="Join Us In India" />
 
@@ -81,7 +81,7 @@ export function TravelSection({ airport, hotels }: TravelSectionProps) {
                     <span>{hotel.checkIn} — {hotel.checkOut}</span>
                   </div>
                   {hotel.groupCode && (
-                    <div className="border border-primary luxury-bg/50 p-4 text-center">
+                    <div className="border border-primary bg-background/50 p-4 text-center">
                       <span className="block text-xs uppercase tracking-widest text-primary mb-1">Group Code</span>
                       <span className="font-mono text-lg text-card-foreground">{hotel.groupCode}</span>
                     </div>
