@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import useEmblaCarousel from 'embla-carousel-react';
 import { MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
-import type { LocalExperience } from '@workspace/api-client-react';
+import type { LocalExperience } from '@/lib/mock-api-hooks';
 import { SectionHeader } from '@/components/OrnamentalElements';
 
 interface ExperiencesSectionProps {
@@ -20,7 +20,7 @@ export function ExperiencesSection({ experiences }: ExperiencesSectionProps) {
   const scrollNext = React.useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
   return (
-    <section id="experiences" className="py-32 px-6 bg-background relative overflow-hidden">
+    <section id="experiences" className="py-32 px-6  relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div className="flex-1 text-left">

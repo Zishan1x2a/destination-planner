@@ -65,31 +65,44 @@ export function AnimatedSectionDivider() {
 }
 
 export function CornerOrnament({ position = "tl", size = 64, color = "currentColor" }: { position?: "tl" | "tr" | "bl" | "br", size?: number, color?: string }) {
-  const rotation = {
-    tl: "rotate-0",
-    tr: "rotate-90",
-    br: "rotate-180",
-    bl: "-rotate-90"
+  const transform = {
+    tl: undefined,
+    tr: "scaleX(-1)",
+    bl: "scaleY(-1)",
+    br: "scale(-1, -1)",
+  }[position];
+
+  const transformOrigin = {
+    tl: undefined,
+    tr: "right top",
+    bl: "left bottom",
+    br: "right bottom",
   }[position];
 
   return (
     <svg 
       width={size} 
       height={size} 
-      viewBox="0 0 100 100" 
+      viewBox="0 0 56 56" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
-      className={`absolute ${rotation}`}
+      className="absolute pointer-events-none select-none"
       style={{
-        ...(position.includes('t') ? { top: 0 } : { bottom: 0 }),
-        ...(position.includes('l') ? { left: 0 } : { right: 0 }),
+        ...(position.includes('t') ? { top: 6 } : { bottom: 6 }),
+        ...(position.includes('l') ? { left: 6 } : { right: 6 }),
+        transform,
+        transformOrigin,
       }}
     >
-      <path d="M0 0C50 0 100 50 100 100C100 50 50 0 0 0Z" stroke={color} strokeWidth="2"/>
-      <path d="M10 10C40 10 90 40 90 90C90 40 40 10 10 10Z" stroke={color} strokeWidth="1"/>
-      <circle cx="20" cy="20" r="3" fill={color} />
-      <circle cx="35" cy="15" r="2" fill={color} />
-      <circle cx="15" cy="35" r="2" fill={color} />
+      {/* Royal Corner L-bracket */}
+      <path d="M2,2 L2,26 Q2,4 26,4 L4,4 L4,2 Z" fill={color} opacity="0.95" />
+      <path d="M2,2 L2,34 Q2,2 34,2" fill="none" stroke={color} strokeWidth="1" opacity="0.7" />
+      <path d="M2,2 L2,20 Q2,8 20,8 L8,8 L8,2 Z" fill="none" stroke={color} strokeWidth="0.8" opacity="0.6" />
+      <circle cx="2" cy="2" r="3" fill={color} />
+      <circle cx="12" cy="3" r="1.5" fill={color} opacity="0.8" />
+      <circle cx="3" cy="12" r="1.5" fill={color} opacity="0.8" />
+      <circle cx="20" cy="4" r="1" fill={color} opacity="0.6" />
+      <circle cx="4" cy="20" r="1" fill={color} opacity="0.6" />
     </svg>
   );
 }
@@ -157,5 +170,35 @@ export function SectionHeader({ label, subLabel, align = "center" }: { label: st
         </>
       )}
     </div>
+  );
+}
+
+export function BackgroundCornerOrnaments({ isInView }: { isInView: boolean }) {
+  const corners = [
+    { pos: 'top-6 left-6', rot: 0 },
+    { pos: 'top-6 right-6', rot: 90 },
+    { pos: 'bottom-16 left-6', rot: 270 },
+    { pos: 'bottom-16 right-6', rot: 180 },
+  ];
+
+  return (
+    <>
+      {corners.map(({ pos, rot }, i) => (
+        <motion.div
+          key={i}
+          className={`absolute ${pos} w-16 h-16 pointer-events-none select-none`}
+          initial={{ opacity: 0, scale: 0.5, rotate: rot }}
+          animate={isInView ? { opacity: 1, scale: 1, rotate: rot } : {}}
+          transition={{ duration: 0.7, delay: 0.3 + i * 0.1 }}
+        >
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2,2 L2,22 M2,2 L22,2" stroke="hsl(42 75% 52%)" strokeWidth="1.2" opacity="0.6" />
+            <path d="M2,8 Q12,8 12,18" stroke="hsl(42 70% 50%)" strokeWidth="0.6" opacity="0.4" />
+            <circle cx="2" cy="2" r="2" fill="hsl(42 80% 58%)" opacity="0.7" />
+            <circle cx="14" cy="14" r="1.2" fill="hsl(42 80% 58%)" opacity="0.4" />
+          </svg>
+        </motion.div>
+      ))}
+    </>
   );
 }

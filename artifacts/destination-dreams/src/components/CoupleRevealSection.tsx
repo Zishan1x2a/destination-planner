@@ -6,7 +6,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { OrnamentDivider, CornerOrnament } from "@/components/OrnamentalElements";
+import { OrnamentDivider, CornerOrnament, BackgroundCornerOrnaments } from "@/components/OrnamentalElements";
 
 interface CoupleRevealSectionProps {
   brideName: string;
@@ -100,10 +100,8 @@ function MandapArch() {
 }
 
 /* ─── Images ─── */
-const GROOM_IMG =
-  "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=600&q=80";
-const BRIDE_IMG =
-  "https://images.unsplash.com/photo-1583898350903-99d234a27b72?w=600&q=80";
+const GROOM_IMG = "/images/groom.png";
+const BRIDE_IMG = "/images/bride.png";
 
 const PETALS = Array.from({ length: 18 }, (_, i) => ({
   id: i, delay: i * 0.45, x: 3 + (i * 5.5) % 94, size: 13 + (i % 5) * 3,
@@ -132,10 +130,13 @@ export function CoupleRevealSection({ brideName, groomName }: CoupleRevealSectio
   const archScale = useTransform(scrollYProgress, [0.2, 0.6], [0.96, 1.02]);
 
   useEffect(() => {
+    let t: ReturnType<typeof setTimeout> | undefined;
     if (isInView) {
-      const t = setTimeout(() => setShowNames(true), 1400);
-      return () => clearTimeout(t);
+      t = setTimeout(() => setShowNames(true), 1400);
     }
+    return () => {
+      if (t) clearTimeout(t);
+    };
   }, [isInView]);
 
   return (
@@ -158,6 +159,9 @@ export function CoupleRevealSection({ brideName, groomName }: CoupleRevealSectio
             "radial-gradient(ellipse 55% 65% at 50% 50%, hsl(42 85% 52% / 0.1) 0%, transparent 65%)",
         }}
       />
+
+      {/* ── Background Corner Ornaments ── */}
+      <BackgroundCornerOrnaments isInView={isInView} />
 
       {/* ── Falling petals ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -201,8 +205,6 @@ export function CoupleRevealSection({ brideName, groomName }: CoupleRevealSectio
               animate={showNames ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9 }}
             >
-              <p className="uppercase tracking-[0.3em] text-xs font-sans mb-1"
-                style={{ color: "hsl(42 70% 65% / 0.6)" }}>The Groom</p>
               <h3 className="font-serif text-2xl md:text-4xl italic"
                 style={{ color: "hsl(42 85% 68%)" }}>
                 {groomName.split(" ")[0]}
@@ -249,9 +251,11 @@ export function CoupleRevealSection({ brideName, groomName }: CoupleRevealSectio
                     src={GROOM_IMG}
                     alt="Groom"
                     className="absolute inset-0 w-full h-full object-cover object-top"
-                    style={{ filter: "brightness(0.88) contrast(1.05) saturate(0.9)" }}
-                    animate={{ scale: [1, 1.04, 1] }}
-                    transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+                    style={{ filter: "brightness(0.92) contrast(1.05) saturate(1.1)" }}
+                    initial={{ scale: 1.2, opacity: 0 }}
+                    animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                    transition={{ duration: 1.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ scale: 1.05 }}
                   />
 
                   {/* Color grade overlay — warm golden tint */}
@@ -324,8 +328,6 @@ export function CoupleRevealSection({ brideName, groomName }: CoupleRevealSectio
               animate={showNames ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9, delay: 0.18 }}
             >
-              <p className="uppercase tracking-[0.3em] text-xs font-sans mb-1"
-                style={{ color: "hsl(42 70% 65% / 0.6)" }}>The Bride</p>
               <h3 className="font-serif text-2xl md:text-4xl italic"
                 style={{ color: "hsl(42 85% 68%)" }}>
                 {brideName.split(" ")[0]}
@@ -367,9 +369,11 @@ export function CoupleRevealSection({ brideName, groomName }: CoupleRevealSectio
                     src={BRIDE_IMG}
                     alt="Bride"
                     className="absolute inset-0 w-full h-full object-cover object-top"
-                    style={{ filter: "brightness(0.88) contrast(1.05) saturate(0.85)" }}
-                    animate={{ scale: [1, 1.04, 1] }}
-                    transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                    style={{ filter: "brightness(0.92) contrast(1.05) saturate(1.1)" }}
+                    initial={{ scale: 1.2, opacity: 0 }}
+                    animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                    transition={{ duration: 1.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ scale: 1.05 }}
                   />
 
                   {/* Color grade — warm maroon tint */}

@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import type { FaqItem } from '@workspace/api-client-react';
+import type { FaqItem } from '@/lib/mock-api-hooks';
 import { InvitationBorder, SectionHeader } from '@/components/OrnamentalElements';
 
 interface FaqSectionProps {
@@ -15,7 +15,7 @@ interface FaqSectionProps {
 
 export function FaqSection({ faqs }: FaqSectionProps) {
   return (
-    <section id="faq" className="py-32 px-6 bg-background relative">
+    <section id="faq" className="py-32 px-6  relative">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

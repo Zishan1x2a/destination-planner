@@ -15,15 +15,15 @@ export function Navigation({ coupleName }: NavigationProps) {
   const links = [
     { href: '#hero', label: 'Home' },
     { href: '#story', label: 'Story' },
-    { href: '#destination', label: 'Destination' },
     { href: '#itinerary', label: 'Itinerary' },
-    { href: '#accept', label: 'Accept' },
+    { href: '#rsvp', label: 'RSVP' },
+    { href: '#destination', label: 'Venue' },
     { href: '#contact', label: 'Contact' }
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 150);
       
       const sections = links.map(l => l.href.substring(1));
       let currentSection = 'hero';
@@ -46,7 +46,7 @@ export function Navigation({ coupleName }: NavigationProps) {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-background/95 backdrop-blur-md border-b-2 border-primary/50 py-4 shadow-lg' : 'bg-transparent py-6'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out ${scrolled ? 'translate-y-0 opacity-100 bg-background/95 backdrop-blur-md border-b-[1.5px] border-primary/40 py-4 shadow-xl' : '-translate-y-full opacity-0 py-4'}`}>
         {scrolled && (
           <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
             backgroundImage: 'radial-gradient(hsl(var(--primary)) 1px, transparent 1px)',
@@ -57,7 +57,7 @@ export function Navigation({ coupleName }: NavigationProps) {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between relative z-10">
           <a href="#hero" className="font-serif text-3xl md:text-4xl tracking-widest text-primary flex items-center gap-3 italic">
             <span className="text-[12px] text-primary">✦</span>
-            {coupleName.split(' ')[0][0]} & {coupleName.split(' ')[2]?.[0] || 'A'}
+            {coupleName?.split(' ')[0]?.[0] || 'P'} & {coupleName?.split(' ')[2]?.[0] || 'A'}
             <span className="text-[12px] text-primary">✦</span>
           </a>
           

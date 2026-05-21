@@ -75,13 +75,13 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: 30 35% 8%;
+  --background: 350 45% 10%;
   --foreground: 42 50% 92%;
-  --card: 38 45% 94%;
-  --card-foreground: 20 30% 15%;
+  --card: 350 40% 14%;
+  --card-foreground: 42 50% 92%;
   --card-border: 42 70% 45%;
   --border: 42 60% 35%;
-  --input: 38 30% 88%;
+  --input: 350 30% 18%;
   --primary: 42 85% 48%;
   --primary-foreground: 20 30% 12%;
   --secondary: 350 55% 32%;
@@ -149,3 +149,92 @@
     pointer-events: none;
   }
 }
+
+/* ── Premium Glowing Gold Border & Custom Shimmer Effects ── */
+@keyframes border-spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gold-shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.glowing-gold-border {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  padding: 4px;
+  background: transparent;
+  display: block;
+}
+
+.glowing-gold-border::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 15%,
+    hsl(var(--primary)) 35%,
+    hsl(var(--accent)) 50%,
+    hsl(var(--primary)) 65%,
+    transparent 85%
+  );
+  animation: border-spin 6s linear infinite;
+  top: -50%;
+  left: -50%;
+  z-index: 1;
+}
+
+.glowing-gold-border::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background: hsl(var(--card));
+  border-radius: calc(var(--radius) - 2px);
+  z-index: 2;
+}
+
+.glowing-gold-border-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--radius) - 4px);
+  overflow: hidden;
+}
+
+/* Gold Text Shimmer */
+.gold-shimmer-text {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--foreground)) 25%,
+    hsl(var(--primary)) 50%,
+    hsl(var(--foreground)) 75%,
+    hsl(var(--primary)) 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gold-shine 6s linear infinite;
+}
+
+/* Custom scrollbar for thumbnails */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

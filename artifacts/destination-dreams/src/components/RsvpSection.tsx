@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useCreateRsvp, useGetRsvpStats, RsvpAttendanceStatus } from '@workspace/api-client-react';
+import { useCreateRsvp, useGetRsvpStats, RsvpAttendanceStatus } from '@/lib/mock-api-hooks';
 import { useToast } from '@/hooks/use-toast';
 import { SiWhatsapp } from 'react-icons/si';
 import { Phone } from 'lucide-react';
@@ -20,7 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import type { ContactInfo } from '@workspace/api-client-react';
+import type { ContactInfo } from '@/lib/mock-api-hooks';
 import { InvitationBorder, OrnamentDivider, SectionHeader } from '@/components/OrnamentalElements';
 
 const rsvpSchema = z.object({
@@ -63,6 +63,9 @@ export function RsvpSection({ contacts }: RsvpSectionProps) {
   const onSubmit = (data: RsvpFormValues) => {
     createRsvp.mutate({ data }, {
       onSuccess: () => {
+        try {
+          localStorage.setItem('wedding_guest_name', data.guestName);
+        } catch (e) {}
         toast({
           title: "Thank you!",
           description: "We can't wait to see you in Udaipur.",
@@ -81,7 +84,7 @@ export function RsvpSection({ contacts }: RsvpSectionProps) {
   };
 
   return (
-    <section id="rsvp" className="py-32 px-6 bg-background relative overflow-hidden">
+    <section id="rsvp" className="py-32 px-6  relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           
@@ -334,7 +337,7 @@ export function RsvpSection({ contacts }: RsvpSectionProps) {
             <div className="mt-12 text-center pt-8">
               <OrnamentDivider variant="diamond" color="hsl(var(--primary))" />
               <p className="text-card-foreground/70 font-serif italic text-lg mt-8">We look forward to celebrating with you.</p>
-              <p className="mt-2 font-serif text-3xl text-primary italic">#PriyaWedsArjun</p>
+              <p className="mt-2 font-serif text-3xl text-primary italic">#MyraWedsAryan</p>
             </div>
           </motion.div>
 
@@ -343,3 +346,4 @@ export function RsvpSection({ contacts }: RsvpSectionProps) {
     </section>
   );
 }
+

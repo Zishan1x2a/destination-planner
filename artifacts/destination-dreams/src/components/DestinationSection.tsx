@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { MapPin } from 'lucide-react';
-import { OrnamentDivider } from '@/components/OrnamentalElements';
+import { OrnamentDivider, BackgroundCornerOrnaments } from '@/components/OrnamentalElements';
 
 interface DestinationSectionProps {
   description: string;
@@ -246,28 +246,7 @@ export function DestinationSection({ description, facts, googleMapsUrl }: Destin
       ))}
 
       {/* ── Animated corner ornaments ── */}
-      {[
-        { pos: 'top-6 left-6', rot: 0 },
-        { pos: 'top-6 right-6', rot: 90 },
-        { pos: 'bottom-16 left-6', rot: 270 },
-        { pos: 'bottom-16 right-6', rot: 180 },
-      ].map(({ pos, rot }, i) => (
-        <motion.div
-          key={i}
-          className={`absolute ${pos} w-16 h-16`}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.7, delay: 0.3 + i * 0.1 }}
-          style={{ transform: `rotate(${rot}deg)` }}
-        >
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2,2 L2,22 M2,2 L22,2" stroke="hsl(42 75% 52%)" strokeWidth="1.2" opacity="0.6" />
-            <path d="M2,8 Q12,8 12,18" stroke="hsl(42 70% 50%)" strokeWidth="0.6" opacity="0.4" />
-            <circle cx="2" cy="2" r="2" fill="hsl(42 80% 58%)" opacity="0.7" />
-            <circle cx="14" cy="14" r="1.2" fill="hsl(42 80% 58%)" opacity="0.4" />
-          </svg>
-        </motion.div>
-      ))}
+      <BackgroundCornerOrnaments isInView={isInView} />
 
       <motion.div className="relative z-10 max-w-5xl mx-auto" style={{ y: textY }}>
 
@@ -335,112 +314,105 @@ export function DestinationSection({ description, facts, googleMapsUrl }: Destin
 
         <ShimmerBand isInView={isInView} delay={1.0} />
 
-        {/* ── Palace silhouette ── */}
-        <PalaceSilhouette isInView={isInView} />
-
-        {/* ── Description ── */}
+        {/* ── Royal Venue Showcase Card ── */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-16 px-4"
-          initial={{ opacity: 0, y: 30 }}
+          className="relative px-6 md:px-12 py-10 md:py-12 mt-16 max-w-3xl mx-auto overflow-hidden flex flex-col items-center"
+          style={{
+            background: 'linear-gradient(135deg, hsl(25 28% 9% / 0.95) 0%, hsl(350 20% 8% / 0.9) 50%, hsl(25 25% 9% / 0.95) 100%)',
+            border: '1px solid hsl(42 65% 45% / 0.35)',
+            borderRadius: '4px',
+          }}
+          initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.2, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <OrnamentDivider variant="floral" color="hsl(42,75%,55%)" />
-          <p className="font-serif text-lg md:text-xl italic leading-relaxed mt-8"
-            style={{ color: 'hsl(42 55% 72% / 0.85)' }}>
-            {description}
-          </p>
-        </motion.div>
+          {/* Decorative Corner Borders */}
+          <div className="absolute top-0 left-0 w-8 h-8 border-t-[2px] border-l-[2px] border-[#FCF6BA]/60" />
+          <div className="absolute top-0 right-0 w-8 h-8 border-t-[2px] border-r-[2px] border-[#FCF6BA]/60" />
+          <div className="absolute bottom-0 left-0 w-8 h-8 border-b-[2px] border-l-[2px] border-[#FCF6BA]/60" />
+          <div className="absolute bottom-0 right-0 w-8 h-8 border-b-[2px] border-r-[2px] border-[#FCF6BA]/60" />
 
-        {/* ── Facts grid ── */}
-        <div className="grid md:grid-cols-2 gap-4 mb-16 max-w-3xl mx-auto">
-          {facts.map((fact, i) => (
-            <motion.div
-              key={i}
-              className="relative flex items-start gap-4 p-5"
-              style={{
-                background: 'linear-gradient(135deg, hsl(42 30% 10% / 0.8) 0%, hsl(25 20% 8% / 0.8) 100%)',
-                border: '1px solid hsl(42 65% 45% / 0.25)',
-                borderRadius: '2px',
-              }}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50, y: 20 }}
-              animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 1.8 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -3, borderColor: 'hsl(42 70% 50% / 0.5)', transition: { duration: 0.25 } }}
-            >
-              {/* Fact number */}
-              <motion.div
-                className="flex-shrink-0 w-8 h-8 flex items-center justify-center font-serif text-sm"
-                style={{
-                  background: 'hsl(42 40% 14%)',
-                  border: '1px solid hsl(42 75% 50% / 0.4)',
-                  color: 'hsl(42 85% 62%)',
-                }}
-                animate={{ boxShadow: ['0 0 0px hsl(42 80% 52% / 0)', '0 0 10px hsl(42 80% 52% / 0.3)', '0 0 0px hsl(42 80% 52% / 0)'] }}
-                transition={{ duration: 3, repeat: Infinity, delay: i * 0.5 }}
-              >
-                {String(i + 1).padStart(2, '0')}
-              </motion.div>
+          {/* Centered Jharokha Arched Image Frame */}
+          <div className="flex justify-center mb-8 relative z-10">
+            <div className="relative p-2.5 bg-[#FCF6BA]/5 border border-[#FCF6BA]/30 rounded-t-full shadow-2xl overflow-hidden w-60 h-72 md:w-64 md:h-80 group">
+              {/* Inner dashed arched frame */}
+              <div className="absolute inset-1.5 border border-dashed border-[#FCF6BA]/25 rounded-t-full pointer-events-none z-10" />
+              
+              {/* Glowing gold lotus crest ornament at the peak of the Jharokha arch */}
+              <div className="absolute -top-1 left-1/2 -translate-x-1/2 z-20 text-xs text-[#FCF6BA]/80 filter drop-shadow-[0_0_8px_hsl(42,85%,68%)] animate-pulse">
+                🪷
+              </div>
 
-              <p className="font-serif text-base leading-relaxed"
-                style={{ color: 'hsl(42 55% 70% / 0.85)' }}>
-                {fact}
-              </p>
-
-              {/* Bottom shimmer */}
-              <motion.div
-                className="absolute bottom-0 left-0 h-[1px]"
-                style={{ background: 'linear-gradient(to right, hsl(42 80% 55% / 0.4), transparent)' }}
-                initial={{ width: 0 }}
-                animate={isInView ? { width: '60%' } : {}}
-                transition={{ duration: 1, delay: 2.2 + i * 0.12 }}
+              <motion.img 
+                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                alt="The Oberoi Udaivilas" 
+                className="w-full h-full object-cover rounded-t-full z-0 transition-transform duration-1000 group-hover:scale-105"
+                style={{ filter: "sepia(8%) contrast(104%) brightness(95%)" }}
               />
-            </motion.div>
-          ))}
-        </div>
+              {/* Deep shadow gradient at the bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              
+              <div className="absolute bottom-4 left-0 right-0 z-20 text-center px-4">
+                <p className="text-[9px] uppercase tracking-[0.25em] text-[#FCF6BA]/70 font-sans">The Royal Venue</p>
+                <h4 className="font-serif text-sm text-[#FCF6BA] mt-0.5 tracking-wider">The Oberoi Udaivilas</h4>
+              </div>
+            </div>
+          </div>
 
-        {/* ── Google Maps CTA ── */}
-        <motion.div
-          className="flex justify-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, delay: 2.4 }}
-        >
-          <motion.a
-            href={googleMapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative flex items-center gap-3 px-10 py-4 font-sans text-sm uppercase tracking-[0.3em] overflow-hidden"
-            style={{
-              background: 'linear-gradient(135deg, hsl(42 70% 36%) 0%, hsl(38 75% 30%) 100%)',
-              border: '1px solid hsl(42 75% 52% / 0.6)',
-              borderRadius: '2px',
-              color: 'hsl(42 90% 88%)',
-            }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            {/* Shimmer sweep */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none"
-              style={{ background: 'linear-gradient(90deg, transparent 0%, hsl(42 90% 75% / 0.2) 50%, transparent 100%)' }}
-              animate={{ x: ['-100%', '200%'] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            {/* Glow on hover */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none"
-              style={{ boxShadow: '0 0 0px hsl(42 80% 52% / 0)' }}
-              whileHover={{ boxShadow: '0 0 30px hsl(42 80% 52% / 0.4)' }}
-              transition={{ duration: 0.3 }}
-            />
-            <MapPin size={16} />
-            <span>View on Google Maps</span>
-            <motion.span
-              animate={{ x: [0, 4, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            >→</motion.span>
-          </motion.a>
+          {/* Title and Short Poetic Mewar Description */}
+          <div className="max-w-xl mx-auto flex flex-col items-center text-center relative z-10 px-4">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-[#FCF6BA]/60 font-sans mb-1.5">
+              Destined for Heritage Royalty
+            </span>
+            <h3 className="font-serif text-2xl md:text-3xl text-[#FCF6BA] mb-4 tracking-wider">
+              The Oberoi Udaivilas
+            </h3>
+            <p className="font-sans text-xs md:text-sm leading-relaxed text-[#FCF6BA]/85 max-w-lg italic font-light">
+              "Spread across fifty acres of royal gardens on the banks of Lake Pichola, The Oberoi Udaivilas is a sanctuary of grand domes, sun-kissed corridors, and shimmering pools—where imperial Mewar heritage meets timeless romance."
+            </p>
+          </div>
+
+          {/* Sleek Horizontal Details Ribbon */}
+          <div className="w-full max-w-2xl border-y border-[#FCF6BA]/20 py-4 my-6 text-[10px] md:text-xs tracking-[0.2em] font-sans uppercase flex flex-wrap justify-center gap-x-4 gap-y-2.5 items-center text-[#FCF6BA]/80 relative z-10 px-4">
+            <div className="flex items-center gap-1.5">
+              <span>Check-In: Dec 23 (2 PM)</span>
+            </div>
+            <span className="text-[#FCF6BA]/40 hidden sm:inline">✦</span>
+            <div className="flex items-center gap-1.5">
+              <span>Lakeside Domes, Udaipur</span>
+            </div>
+            <span className="text-[#FCF6BA]/40 hidden sm:inline">✦</span>
+            <div className="flex items-center gap-1.5">
+              <span>Check-Out: Dec 25 (12 PM)</span>
+            </div>
+          </div>
+
+          {/* Slim Elegant Maps Button */}
+          <div className="flex justify-center mt-2 relative z-10">
+            <motion.a
+              href={googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative flex items-center justify-center gap-2.5 px-6 py-2.5 font-sans text-[10px] uppercase tracking-[0.25em] overflow-hidden rounded-[30px] shadow-lg"
+              style={{
+                background: 'linear-gradient(135deg, hsl(42 70% 36%) 0%, hsl(38 75% 30%) 100%)',
+                border: '1px solid hsl(42 75% 52% / 0.6)',
+                color: 'hsl(42 90% 88%)',
+              }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              {/* Shimmer sweep */}
+              <motion.div
+                className="absolute inset-0 pointer-events-none"
+                style={{ background: 'linear-gradient(90deg, transparent 0%, hsl(42 90% 75% / 0.2) 50%, transparent 100%)' }}
+                animate={{ x: ['-100%', '200%'] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <MapPin size={12} className="animate-bounce" />
+              <span>View Location Map</span>
+            </motion.a>
+          </div>
         </motion.div>
 
       </motion.div>

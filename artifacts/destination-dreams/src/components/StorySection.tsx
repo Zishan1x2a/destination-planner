@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion, useInView, useScroll, useTransform, useMotionValue, animate } from 'framer-motion';
-import { OrnamentDivider } from '@/components/OrnamentalElements';
+import { OrnamentDivider, BackgroundCornerOrnaments } from '@/components/OrnamentalElements';
 
 interface StorySectionProps {
   story: string;
@@ -206,17 +206,23 @@ function GlowBorder({ isInView }: { isInView: boolean }) {
     <>
       {/* Top */}
       <motion.div className="absolute top-0 left-0 h-[1px]"
-        style={{ background: 'linear-gradient(to right, transparent, hsl(42 80% 55% / 0.7) 40%, hsl(42 90% 70%) 60%, transparent)' }}
+        style={{ 
+          background: 'linear-gradient(to right, transparent, hsl(42 80% 55% / 0.7) 40%, hsl(42 90% 70%) 60%, transparent)',
+          width: '100%', 
+          transformOrigin: 'left' 
+        }}
         initial={{ scaleX: 0 }} animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1.4, delay: 0.3 }}
-        style2={{ width: '100%', transformOrigin: 'left' }}
       />
       {/* Bottom */}
       <motion.div className="absolute bottom-0 right-0 h-[1px]"
-        style={{ background: 'linear-gradient(to left, transparent, hsl(42 80% 55% / 0.7) 40%, hsl(42 90% 70%) 60%, transparent)', width: '100%' }}
+        style={{ 
+          background: 'linear-gradient(to left, transparent, hsl(42 80% 55% / 0.7) 40%, hsl(42 90% 70%) 60%, transparent)', 
+          width: '100%',
+          transformOrigin: 'right'
+        }}
         initial={{ scaleX: 0 }} animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1.4, delay: 0.5, ease: 'easeInOut' }}
-        style2={{ transformOrigin: 'right' }}
       />
     </>
   );
@@ -278,6 +284,9 @@ export function StorySection({ story }: StorySectionProps) {
       <div className="absolute inset-0 pointer-events-none" style={{
         background: 'radial-gradient(ellipse 110% 110% at 50% 50%, transparent 35%, hsl(25 30% 3% / 0.85) 100%)',
       }} />
+
+      {/* ── Background Corner Ornaments ── */}
+      <BackgroundCornerOrnaments isInView={isInView} />
 
       {/* ── Petals ── */}
       {petals.map((p, i) => <Petal key={i} {...p} />)}
@@ -424,32 +433,59 @@ export function StorySection({ story }: StorySectionProps) {
           <SideOrnament side="left" isInView={isInView} />
           <SideOrnament side="right" isInView={isInView} />
 
-          {/* Opening quote */}
-          <motion.div
-            className="absolute top-6 left-8 md:left-16 font-serif text-7xl leading-none select-none"
-            style={{ color: 'hsl(42 75% 52% / 0.2)' }}
-            initial={{ opacity: 0, scale: 0.4, x: -20 }}
-            animate={isInView ? { opacity: 1, scale: 1, x: 0 } : {}}
-            transition={{ duration: 0.9, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
-          >
-            "
-          </motion.div>
+          {/* Card Content: Grid Layout with Image and Story */}
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left: Romantic Image */}
+            <motion.div 
+              className="lg:col-span-5 flex justify-center"
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+              transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="relative p-2 bg-[#FCF6BA]/10 border border-[#FCF6BA]/30 rounded-lg shadow-2xl overflow-hidden max-w-sm w-full group">
+                {/* Thin gold inner frame border */}
+                <div className="absolute inset-1.5 border border-[#FCF6BA]/20 pointer-events-none z-10" />
+                
+                <motion.img 
+                  src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                  alt="Our Story" 
+                  className="w-full h-[260px] md:h-[300px] object-cover rounded-md z-0 transition-transform duration-1000 group-hover:scale-105"
+                  style={{
+                    filter: "sepia(12%) contrast(105%) brightness(92%)"
+                  }}
+                />
+              </div>
+            </motion.div>
 
-          {/* Word-by-word story */}
-          <div className="relative z-10 pt-8">
-            <StoryText story={story} isInView={isInView} />
+            {/* Right: Story Text with Quotes */}
+            <div className="lg:col-span-7 relative">
+              {/* Opening quote */}
+              <motion.div
+                className="absolute -top-10 -left-6 font-serif text-7xl leading-none select-none opacity-20"
+                style={{ color: 'hsl(42 75% 52%)' }}
+                initial={{ opacity: 0, scale: 0.4, x: -20 }}
+                animate={isInView ? { opacity: 0.2, scale: 1, x: 0 } : {}}
+                transition={{ duration: 0.9, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
+              >
+                "
+              </motion.div>
+
+              <div className="relative z-10">
+                <StoryText story={story} isInView={isInView} />
+              </div>
+
+              {/* Closing quote */}
+              <motion.div
+                className="absolute -bottom-10 -right-4 font-serif text-7xl leading-none select-none rotate-180 opacity-20"
+                style={{ color: 'hsl(42 75% 52%)' }}
+                initial={{ opacity: 0, scale: 0.4, x: 20 }}
+                animate={isInView ? { opacity: 0.2, scale: 1, x: 0 } : {}}
+                transition={{ duration: 0.9, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              >
+                "
+              </motion.div>
+            </div>
           </div>
-
-          {/* Closing quote */}
-          <motion.div
-            className="absolute bottom-4 right-8 md:right-16 font-serif text-7xl leading-none select-none rotate-180"
-            style={{ color: 'hsl(42 75% 52% / 0.2)' }}
-            initial={{ opacity: 0, scale: 0.4, x: 20 }}
-            animate={isInView ? { opacity: 1, scale: 1, x: 0 } : {}}
-            transition={{ duration: 0.9, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            "
-          </motion.div>
 
           {/* Inner radial glow */}
           <motion.div

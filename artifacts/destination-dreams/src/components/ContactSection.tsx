@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import type { ContactInfo } from "@workspace/api-client-react";
-import { CornerOrnament, OrnamentDivider } from "@/components/OrnamentalElements";
+import type { ContactInfo } from "@/lib/mock-api-hooks";
+import { CornerOrnament, OrnamentDivider, BackgroundCornerOrnaments } from "@/components/OrnamentalElements";
 
 interface ContactSectionProps {
   contacts: ContactInfo[];
@@ -200,6 +200,9 @@ export function ContactSection({ contacts }: ContactSectionProps) {
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse 60% 50% at 50% 50%, hsl(42 80% 40% / 0.08) 0%, transparent 70%)" }} />
 
+      {/* ── Background Corner Ornaments ── */}
+      <BackgroundCornerOrnaments isInView={isInView} />
+
       {/* Gold ambient dots */}
       {DOTS.map((d, i) => <GoldDot key={i} x={d.x} y={d.y} delay={d.delay} />)}
 
@@ -252,3 +255,4 @@ export function ContactSection({ contacts }: ContactSectionProps) {
     </section>
   );
 }
+

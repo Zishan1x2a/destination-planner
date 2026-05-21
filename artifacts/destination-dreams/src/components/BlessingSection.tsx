@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { OrnamentDivider } from "@/components/OrnamentalElements";
-import { useListBlessings, useCreateBlessing } from "@workspace/api-client-react";
+import { OrnamentDivider, BackgroundCornerOrnaments } from "@/components/OrnamentalElements";
+import { useListBlessings, useCreateBlessing } from "@/lib/mock-api-hooks";
 
 /* ─── Floating diya ─── */
 function FloatingDiya({ x, delay }: { x: number; delay: number }) {
@@ -33,8 +33,69 @@ function OrbitDot({ angle, radius, duration }: { angle: number; radius: number; 
   );
 }
 
+/* ─── Bursting leaves when message is sending ─── */
+function BurstingLeaves() {
+  const leavesCount = 20;
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-visible z-50">
+      {Array.from({ length: leavesCount }).map((_, i) => {
+        const angle = (i * 360) / leavesCount + (Math.random() - 0.5) * 15;
+        const radius = 130 + Math.random() * 180; // Travel range
+        const duration = 2.0 + Math.random() * 1.5;
+        const delay = Math.random() * 0.3;
+        const startRotate = Math.random() * 360;
+        const endRotate = startRotate + (Math.random() > 0.5 ? 360 : -360);
+        
+        return (
+          <motion.div
+            key={i}
+            className="absolute text-2xl select-none"
+            initial={{ x: 0, y: 0, scale: 0.1, opacity: 0 }}
+            animate={{
+              x: Math.cos((angle * Math.PI) / 180) * radius,
+              y: Math.sin((angle * Math.PI) / 180) * radius,
+              scale: [0.1, 1.4, 0.7],
+              opacity: [0, 1, 1, 0],
+              rotate: [startRotate, endRotate]
+            }}
+            transition={{
+              duration,
+              ease: "easeOut",
+              delay
+            }}
+            style={{
+              top: "50%",
+              left: "50%",
+              marginTop: "-16px",
+              marginLeft: "-16px",
+            }}
+          >
+            {/* Elegant mixture of fall and spring leaves for gold-green royal aesthetic */}
+            {i % 3 === 0 ? "🍃" : i % 3 === 1 ? "🌿" : "🍁"}
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
 /* ─── Center mandala ─── */
-function CenterMandala() {
+function CenterMandala({ leafTrigger }: { leafTrigger: number }) {
+  const [bursts, setBursts] = useState<{ id: number }[]>([]);
+
+  useEffect(() => {
+    if (leafTrigger === 0) return;
+    const newId = Date.now();
+    setBursts((prev) => [...prev, { id: newId }]);
+    
+    // Cleanup burst after animation completes (3.8s)
+    const timeout = setTimeout(() => {
+      setBursts((prev) => prev.filter((b) => b.id !== newId));
+    }, 3800);
+    
+    return () => clearTimeout(timeout);
+  }, [leafTrigger]);
+
   return (
     <div className="relative w-40 h-40 md:w-56 md:h-56 flex items-center justify-center">
       {[0, 45, 90, 135, 180, 225, 270, 315].map((a, i) => (
@@ -74,6 +135,11 @@ function CenterMandala() {
           <span className="text-xl md:text-2xl select-none">🪔</span>
         </motion.div>
       </div>
+
+      {/* Render active leaf bursts */}
+      {bursts.map((b) => (
+        <BurstingLeaves key={b.id} />
+      ))}
     </div>
   );
 }
@@ -90,10 +156,16 @@ function Rose({ x, delay }: { x: number; delay: number }) {
 }
 
 /* ─── Infinite scroll ticker ─── */
-function BlessingTicker({ messages }: { messages: string[] }) {
-  if (messages.length === 0) return null;
+interface BlessingItem {
+  id: number;
+  guestName: string;
+  message: string;
+}
 
-  const doubled = [...messages, ...messages];
+function BlessingTicker({ blessings }: { blessings: BlessingItem[] }) {
+  if (blessings.length === 0) return null;
+
+  const doubled = [...blessings, ...blessings];
 
   return (
     <div className="relative w-full overflow-hidden mt-10" style={{ maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)" }}>
@@ -105,29 +177,38 @@ function BlessingTicker({ messages }: { messages: string[] }) {
         style={{ background: "linear-gradient(to left, hsl(25 30% 5%), transparent)" }} />
 
       <motion.div
-        className="flex gap-6 w-max"
+        className="flex gap-6 w-max py-2"
         animate={{ x: [0, `-${50}%`] }}
-        transition={{ duration: Math.max(messages.length * 8, 20), repeat: Infinity, ease: "linear" }}
+        transition={{ duration: Math.max(blessings.length * 10, 20), repeat: Infinity, ease: "linear" }}
       >
-        {doubled.map((msg, i) => (
+        {doubled.map((item, i) => (
           <div
             key={i}
-            className="relative flex-shrink-0 px-6 py-4 max-w-xs"
+            className="relative flex-shrink-0 flex items-stretch px-5 py-4"
             style={{
-              background: "linear-gradient(135deg, hsl(42 30% 10%) 0%, hsl(25 20% 8%) 100%)",
-              border: "1px solid hsl(42 70% 45% / 0.25)",
-              borderRadius: "2px",
-              minWidth: "220px",
+              background: "linear-gradient(135deg, hsl(42 35% 11%) 0%, hsl(25 25% 8%) 100%)",
+              border: "1.5px solid hsl(42 70% 45% / 0.25)",
+              borderRadius: "8px",
+              width: "320px",
+              minWidth: "320px",
+              maxWidth: "320px",
             }}
           >
-            <div className="absolute top-2 left-3 font-serif text-2xl leading-none opacity-20"
-              style={{ color: "hsl(42 80% 58%)" }}>"</div>
-            <p className="font-serif text-sm italic leading-relaxed pt-1"
-              style={{ color: "hsl(42 60% 70% / 0.85)" }}>
-              {msg}
-            </p>
-            <div className="mt-2 flex justify-center">
-              <span className="text-xs" style={{ color: "hsl(42 70% 52% / 0.4)" }}>✦</span>
+            {/* Left side: Guest Name in beautiful side-by-side design */}
+            <div className="flex flex-col items-center justify-center pr-4 mr-2 border-r border-dashed border-primary/30 min-w-[80px] max-w-[80px] select-none overflow-hidden">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-primary/50 font-sans mb-1">From</span>
+              <p className="font-serif text-sm font-semibold text-primary gold-shimmer-text text-center break-words w-full leading-tight">
+                {item.guestName || "Well Wisher"}
+              </p>
+              <span className="text-[10px] text-primary/40 mt-1">✦</span>
+            </div>
+
+            {/* Right side: Message */}
+            <div className="flex-1 flex flex-col justify-center relative min-w-0 overflow-hidden">
+              <div className="absolute top-0 left-0 font-serif text-3xl leading-none opacity-20 text-primary">“</div>
+              <p className="font-serif text-[13px] md:text-sm italic leading-relaxed pl-4 pr-1 text-foreground/90 pt-2 break-words whitespace-normal max-h-[96px] overflow-y-auto no-scrollbar">
+                {item.message}
+              </p>
             </div>
           </div>
         ))}
@@ -137,9 +218,37 @@ function BlessingTicker({ messages }: { messages: string[] }) {
 }
 
 /* ─── Message form ─── */
-function BlessingForm({ onSuccess }: { onSuccess: () => void }) {
+function BlessingForm({ onSuccess, onSendingChange }: { onSuccess: () => void; onSendingChange: (sending: boolean) => void }) {
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [detectedName, setDetectedName] = useState("Well Wisher");
+
+  // Helper to dynamically read guest name from URL or RSVP localStorage on load/mount
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    
+    const getGuestName = () => {
+      const params = new URLSearchParams(window.location.search);
+      const fromUrl = params.get("guest") || params.get("name");
+      if (fromUrl) return fromUrl.trim();
+      
+      try {
+        const fromStorage = localStorage.getItem("wedding_guest_name");
+        if (fromStorage) return fromStorage.trim();
+      } catch (e) {}
+      
+      return "Well Wisher";
+    };
+
+    setDetectedName(getGuestName());
+
+    // Setup an interval or listener to watch localStorage changes
+    const handleStorageChange = () => {
+      setDetectedName(getGuestName());
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   const { mutate, isPending } = useCreateBlessing({
     mutation: {
@@ -147,6 +256,9 @@ function BlessingForm({ onSuccess }: { onSuccess: () => void }) {
         setSubmitted(true);
         setMessage("");
         onSuccess();
+        onSendingChange(false);
+        // Second celebration burst when successfully sent
+        setTimeout(() => onSendingChange(true), 200);
         setTimeout(() => setSubmitted(false), 3500);
       },
     },
@@ -155,7 +267,8 @@ function BlessingForm({ onSuccess }: { onSuccess: () => void }) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
-    mutate({ data: { guestName: "Guest", message: message.trim() } });
+    onSendingChange(true);
+    mutate({ data: { guestName: detectedName, message: message.trim() } });
   };
 
   return (
@@ -215,16 +328,23 @@ function BlessingForm({ onSuccess }: { onSuccess: () => void }) {
           </p>
         </motion.div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto">
+        <form onSubmit={handleSubmit} className="space-y-5 max-w-lg mx-auto">
+          {/* Blessing Message Input */}
           <div>
-            <label className="block text-xs uppercase tracking-[0.2em] mb-2 font-sans"
-              style={{ color: "hsl(42 60% 55% / 0.6)" }}>
-              Your Blessing
-            </label>
+            <div className="flex justify-between items-center mb-2 gap-4">
+              <label className="block text-xs uppercase tracking-[0.2em] font-sans"
+                style={{ color: "hsl(42 60% 55% / 0.6)" }}>
+                Your Blessing
+              </label>
+              {/* Creative design: shows who is sending this blessing automatically! */}
+              <div className="text-xs italic font-serif" style={{ color: "hsl(42 50% 55% / 0.6)" }}>
+                Sending as: <span className="text-primary gold-shimmer-text font-sans not-italic font-semibold">{detectedName}</span>
+              </div>
+            </div>
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Write your heartfelt wishes for Priya & Arjun…"
+              placeholder="Write your heartfelt wishes for Myra & Aryan…"
               rows={4}
               style={{
                 background: "hsl(25 25% 9%)",
@@ -265,7 +385,7 @@ function BlessingForm({ onSuccess }: { onSuccess: () => void }) {
               animate={{ x: ["-100%", "200%"] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
             />
-            {isPending ? "Sending…" : "Send Blessing ✦"}
+            {isPending ? "Sending Blessing…" : "Send Blessing ✦"}
           </motion.button>
         </form>
       )}
@@ -281,6 +401,14 @@ export function BlessingSection() {
 
   const { data: guestBlessings = [], refetch } = useListBlessings();
 
+  const [leafTrigger, setLeafTrigger] = useState(0);
+
+  const handleSendingChange = (sending: boolean) => {
+    if (sending) {
+      setLeafTrigger((prev) => prev + 1);
+    }
+  };
+
   return (
     <section
       ref={ref}
@@ -293,6 +421,9 @@ export function BlessingSection() {
         y: bgY,
         background: "radial-gradient(ellipse 70% 60% at 50% 40%, hsl(42 70% 30% / 0.12) 0%, transparent 65%), radial-gradient(ellipse 40% 40% at 20% 80%, hsl(350 50% 25% / 0.08) 0%, transparent 60%)",
       }} />
+
+      {/* ── Background Corner Ornaments ── */}
+      <BackgroundCornerOrnaments isInView={isInView} />
 
       {/* Falling roses */}
       {[8, 20, 35, 50, 65, 80, 92].map((x, i) => <Rose key={i} x={x} delay={i * 0.8} />)}
@@ -317,15 +448,15 @@ export function BlessingSection() {
         <motion.div className="flex justify-center mb-16"
           initial={{ opacity: 0, scale: 0.5 }} animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1.1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}>
-          <CenterMandala />
+          <CenterMandala leafTrigger={leafTrigger} />
         </motion.div>
 
         {/* Form */}
-        <BlessingForm onSuccess={() => refetch()} />
+        <BlessingForm onSuccess={() => refetch()} onSendingChange={handleSendingChange} />
 
         {/* Scrolling ticker of submitted blessings */}
         {guestBlessings.length > 0 && (
-          <BlessingTicker messages={guestBlessings.map((b) => b.message)} />
+          <BlessingTicker blessings={guestBlessings} />
         )}
 
         {/* Bottom shloka */}
@@ -348,3 +479,5 @@ export function BlessingSection() {
     </section>
   );
 }
+
+
