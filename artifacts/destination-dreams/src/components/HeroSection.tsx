@@ -187,7 +187,7 @@ export function HeroSection({ coupleName, weddingDate, destination, onOpen, isOp
       </div>
 
       <motion.div 
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 text-[#FCF6BA]"
+        className="absolute bottom-20 md:bottom-12 left-1/2 -translate-x-1/2 z-20 text-[#FCF6BA]"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.5, duration: 1 }}

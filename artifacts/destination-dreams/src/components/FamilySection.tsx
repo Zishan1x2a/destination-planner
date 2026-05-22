@@ -11,25 +11,25 @@ interface FamilyMember {
 
 /* ─── Extended Family Data ─── */
 const BRIDE_FAMILY: FamilyMember[] = [
-  { name: "Rajesh Sharma", relation: "Father of the Bride", img: "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=300&q=80" },
-  { name: "Sunita Sharma", relation: "Mother of the Bride", img: "https://images.unsplash.com/photo-1509460913899-515f1df34fea?w=300&q=80" },
-  { name: "Devendra Sharma", relation: "Grandfather", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80" },
-  { name: "Savitri Sharma", relation: "Grandmother", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80" },
-  { name: "Rahul Sharma", relation: "Brother", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" },
-  { name: "Neha Sharma", relation: "Sister", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" },
-  { name: "Amit Sharma", relation: "Uncle (Chacha)", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80" },
-  { name: "Priya Sharma", relation: "Aunt (Chachi)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" },
+  { name: "Rajesh Sharma", relation: "Father of the Bride", img: "https://images.unsplash.com/photo-1621609764095-b32bbe35cf3a?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Sunita Sharma", relation: "Mother of the Bride", img: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Devendra Sharma", relation: "Grandfather", img: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Savitri Sharma", relation: "Grandmother", img: "https://images.unsplash.com/photo-1610030470214-5df6d2524a87?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Rahul Sharma", relation: "Brother", img: "https://images.unsplash.com/photo-1605087085244-6729a98e6f8d?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Neha Sharma", relation: "Sister", img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Amit Sharma", relation: "Uncle (Chacha)", img: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Priya Sharma", relation: "Aunt (Chachi)", img: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=300&h=380&fit=crop&crop=faces&q=80" },
 ];
 
 const GROOM_FAMILY: FamilyMember[] = [
-  { name: "Suresh Mehta", relation: "Father of the Groom", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80" },
-  { name: "Kavita Mehta", relation: "Mother of the Groom", img: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=300&q=80" },
-  { name: "Harish Mehta", relation: "Grandfather", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" },
-  { name: "Rukmani Mehta", relation: "Grandmother", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&q=80" },
-  { name: "Vikram Mehta", relation: "Brother", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80" },
-  { name: "Ananya Mehta", relation: "Sister", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&q=80" },
-  { name: "Rajesh Mehta", relation: "Uncle (Tauji)", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80" },
-  { name: "Meena Mehta", relation: "Aunt (Taiji)", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80" },
+  { name: "Suresh Mehta", relation: "Father of the Groom", img: "https://images.unsplash.com/photo-1605087114187-5421c4355554?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Kavita Mehta", relation: "Mother of the Groom", img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Harish Mehta", relation: "Grandfather", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Rukmani Mehta", relation: "Grandmother", img: "https://images.unsplash.com/photo-1616756351484-798f37bdffa0?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Vikram Mehta", relation: "Brother", img: "https://images.unsplash.com/photo-1607990283143-e81e7a2c93ab?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Ananya Mehta", relation: "Sister", img: "https://images.unsplash.com/photo-1596783074918-c84cb06531ca?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Rajesh Mehta", relation: "Uncle (Tauji)", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=380&fit=crop&crop=faces&q=80" },
+  { name: "Meena Mehta", relation: "Aunt (Taiji)", img: "https://images.unsplash.com/photo-1610030469668-8e4a7c3f2a0a?w=300&h=380&fit=crop&crop=faces&q=80" },
 ];
 
 /* ─── Premium Arched Member Card ─── */

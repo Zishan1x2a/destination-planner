@@ -598,6 +598,50 @@ export function EnvelopeIntro({ coupleName, weddingDate, destination, onComplete
                   fill="url(#rFold)" stroke="url(#royalGold)" strokeWidth="1.5" opacity="0.9" />
                 <polygon points={`0,${H} ${W},${H} ${W/2},${H*0.56}`}
                   fill="url(#bFold)" stroke="url(#royalGold)" strokeWidth="2" opacity="1" />
+
+                {/* Left Paisley Butti */}
+                <g transform="translate(45, 115) scale(0.32)" opacity="0.85">
+                  <path d="M 40 80 Q 20 70 20 50 Q 20 30 40 30 Q 60 30 60 50 Q 60 65 45 75 Q 40 78 40 80 Z" fill="url(#royalGold)" />
+                  <path d="M 40 80 Q 5 60 10 30 Q 15 0 40 0 Q 65 0 70 30 Q 75 60 40 80 Z" fill="none" stroke="url(#royalGold)" strokeWidth="2" />
+                  <path d="M 40 0 C 50 -20 25 -35 30 -50 C 35 -65 55 -55 50 -40 C 45 -25 50 -10 40 0 Z" fill="url(#royalGold)" />
+                  <circle cx="40" cy="30" r="3" fill="#4A0005" />
+                  <circle cx="40" cy="50" r="4" fill="#4A0005" />
+                  <path d="M 30 40 Q 40 45 50 40" stroke="url(#royalGold)" strokeWidth="1.5" fill="none" />
+                </g>
+
+                {/* Right Paisley Butti (Flipped) */}
+                <g transform="translate(435, 115) scale(-0.32, 0.32)" opacity="0.85">
+                  <path d="M 40 80 Q 20 70 20 50 Q 20 30 40 30 Q 60 30 60 50 Q 60 65 45 75 Q 40 78 40 80 Z" fill="url(#royalGold)" />
+                  <path d="M 40 80 Q 5 60 10 30 Q 15 0 40 0 Q 65 0 70 30 Q 75 60 40 80 Z" fill="none" stroke="url(#royalGold)" strokeWidth="2" />
+                  <path d="M 40 0 C 50 -20 25 -35 30 -50 C 35 -65 55 -55 50 -40 C 45 -25 50 -10 40 0 Z" fill="url(#royalGold)" />
+                  <circle cx="40" cy="30" r="3" fill="#4A0005" />
+                  <circle cx="40" cy="50" r="4" fill="#4A0005" />
+                  <path d="M 30 40 Q 40 45 50 40" stroke="url(#royalGold)" strokeWidth="1.5" fill="none" />
+                </g>
+
+                {/* Left Royal Elephant */}
+                <g transform="translate(55, 220) scale(0.6)" opacity="0.85">
+                  <path d="M 45 40 Q 55 20 75 20 L 95 20 Q 115 20 125 35 Q 130 45 130 55 L 125 70 Q 120 80 110 80 L 105 80 L 105 105 Q 105 110 100 110 L 90 110 Q 85 110 85 100 L 85 80 L 70 80 L 70 105 Q 70 110 65 110 L 55 110 Q 50 110 50 100 L 50 80 Q 40 80 35 70 Q 30 60 25 50 Q 20 40 10 40 Q 5 40 5 45 Q 5 50 12 55 Q 18 60 18 65 Q 18 70 12 70 Q 5 70 2 65 Q 0 60 0 50 Q 0 35 15 25 Q 25 15 35 25 Q 40 30 45 40 Z" fill="url(#royalGold)" />
+                  <path d="M 65 20 L 105 20 L 100 0 L 70 0 Z" fill="url(#royalGold)" />
+                  <path d="M 75 0 Q 85 -15 95 0 Z" fill="url(#royalGold)" />
+                  <circle cx="85" cy="-5" r="3" fill="#FCF6BA" />
+                  <circle cx="28" cy="35" r="2.5" fill="#4A0005" />
+                  <circle cx="28" cy="35" r="1" fill="#FCF6BA" />
+                  <path d="M 62 42 Q 85 62 108 42 L 104 70 Q 85 80 66 70 Z" fill="#9B111E" stroke="url(#royalGold)" strokeWidth="1.5" />
+                  <circle cx="85" cy="58" r="2.5" fill="url(#royalGold)" />
+                </g>
+
+                {/* Right Royal Elephant (Flipped) */}
+                <g transform="translate(425, 220) scale(-0.6, 0.6)" opacity="0.85">
+                  <path d="M 45 40 Q 55 20 75 20 L 95 20 Q 115 20 125 35 Q 130 45 130 55 L 125 70 Q 120 80 110 80 L 105 80 L 105 105 Q 105 110 100 110 L 90 110 Q 85 110 85 100 L 85 80 L 70 80 L 70 105 Q 70 110 65 110 L 55 110 Q 50 110 50 100 L 50 80 Q 40 80 35 70 Q 30 60 25 50 Q 20 40 10 40 Q 5 40 5 45 Q 5 50 12 55 Q 18 60 18 65 Q 18 70 12 70 Q 5 70 2 65 Q 0 60 0 50 Q 0 35 15 25 Q 25 15 35 25 Q 40 30 45 40 Z" fill="url(#royalGold)" />
+                  <path d="M 65 20 L 105 20 L 100 0 L 70 0 Z" fill="url(#royalGold)" />
+                  <path d="M 75 0 Q 85 -15 95 0 Z" fill="url(#royalGold)" />
+                  <circle cx="85" cy="-5" r="3" fill="#FCF6BA" />
+                  <circle cx="28" cy="35" r="2.5" fill="#4A0005" />
+                  <circle cx="28" cy="35" r="1" fill="#FCF6BA" />
+                  <path d="M 62 42 Q 85 62 108 42 L 104 70 Q 85 80 66 70 Z" fill="#9B111E" stroke="url(#royalGold)" strokeWidth="1.5" />
+                  <circle cx="85" cy="58" r="2.5" fill="url(#royalGold)" />
+                </g>
               </svg>
 
               {/* Center gold rule */}
@@ -723,8 +767,53 @@ export function EnvelopeIntro({ coupleName, weddingDate, destination, onComplete
                   <line x1="0" y1="1" x2={W} y2="1" stroke="url(#royalGold)" strokeWidth="3" opacity="0.9" />
                   <line x1="0" y1="1" x2={W/2} y2="180" stroke="url(#royalGold)" strokeWidth="1.5" opacity="0.8" />
                   <line x1={W} y1="1" x2={W/2} y2="180" stroke="url(#royalGold)" strokeWidth="1.5" opacity="0.8" />
-                  <circle cx={W/2} cy="30" r="7" fill="url(#royalGold)" opacity="0.9" />
-                  <circle cx={W/2} cy="30" r="12" stroke="url(#royalGold)" strokeWidth="1.5" opacity="0.6" fill="none" />
+
+                  {/* Inner triangular border with dotted stroke */}
+                  <path d="M 30 10 L 240 162 L 450 10" fill="none" stroke="url(#royalGold)" strokeWidth="1" strokeDasharray="3,4" opacity="0.8" />
+                  {/* Additional inner line for high-end double border look */}
+                  <path d="M 45 10 L 240 152 L 435 10" fill="none" stroke="url(#royalGold)" strokeWidth="0.8" opacity="0.5" />
+
+                  {/* Hanging Lotus bead at the flap peak (240, 180) */}
+                  <g transform="translate(240, 180)" opacity="0.95">
+                    <line x1="0" y1="0" x2="0" y2="12" stroke="url(#royalGold)" strokeWidth="1.5" />
+                    <circle cx="0" cy="12" r="3" fill="url(#royalGold)" />
+                    <path d="M -8 15 Q -10 25 0 30 Q 10 25 8 15 Q 0 20 -8 15 Z" fill="url(#royalGold)" />
+                    <path d="M -4 16 Q 0 10 4 16 Q 0 22 -4 16 Z" fill="url(#royalGold)" opacity="0.8" />
+                    <circle cx="0" cy="30" r="1.5" fill="url(#royalGold)" />
+                  </g>
+
+                  {/* Beautiful ornate mandala on the top flap */}
+                  <g transform="translate(240, 65)" opacity="0.95">
+                    <circle cx="0" cy="0" r="26" stroke="url(#royalGold)" strokeWidth="1" fill="none" />
+                    <circle cx="0" cy="0" r="20" stroke="url(#royalGold)" strokeWidth="0.8" strokeDasharray="2,2" fill="none" />
+                    <circle cx="0" cy="0" r="14" stroke="url(#royalGold)" strokeWidth="1" fill="none" />
+                    {Array.from({ length: 16 }).map((_, i) => {
+                      const angle = (i * 360) / 16;
+                      return (
+                        <path
+                          key={i}
+                          d="M 0 -20 Q 5 -26 0 -32 Q -5 -26 0 -20"
+                          fill="url(#royalGold)"
+                          transform={`rotate(${angle})`}
+                          opacity="0.8"
+                        />
+                      );
+                    })}
+                    <path d="M 0 -10 Q 3 -5 0 0 Q -3 -5 0 -10 Z" fill="url(#royalGold)" />
+                    <path d="M 0 -10 Q 3 -5 0 0 Q -3 -5 0 -10 Z" fill="url(#royalGold)" transform="rotate(45)" />
+                    <path d="M 0 -10 Q 3 -5 0 0 Q -3 -5 0 -10 Z" fill="url(#royalGold)" transform="rotate(90)" />
+                    <path d="M 0 -10 Q 3 -5 0 0 Q -3 -5 0 -10 Z" fill="url(#royalGold)" transform="rotate(135)" />
+                    <path d="M 0 -10 Q 3 -5 0 0 Q -3 -5 0 -10 Z" fill="url(#royalGold)" transform="rotate(180)" />
+                    <path d="M 0 -10 Q 3 -5 0 0 Q -3 -5 0 -10 Z" fill="url(#royalGold)" transform="rotate(225)" />
+                    <path d="M 0 -10 Q 3 -5 0 0 Q -3 -5 0 -10 Z" fill="url(#royalGold)" transform="rotate(270)" />
+                    <path d="M 0 -10 Q 3 -5 0 0 Q -3 -5 0 -10 Z" fill="url(#royalGold)" transform="rotate(315)" />
+                    <circle cx="0" cy="0" r="4.5" fill="#FCF6BA" />
+                    <circle cx="0" cy="0" r="2" fill="#4A0005" />
+                  </g>
+
+                  {/* Floral creepers flowing out from center mandala to sides */}
+                  <path d="M 200 65 Q 160 50 120 70 T 60 65" fill="none" stroke="url(#royalGold)" strokeWidth="1" opacity="0.7" />
+                  <path d="M 280 65 Q 320 50 360 70 T 420 65" fill="none" stroke="url(#royalGold)" strokeWidth="1" opacity="0.7" />
                 </svg>
               </div>
 

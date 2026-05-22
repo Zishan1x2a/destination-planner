@@ -48,14 +48,7 @@ Thumbs.db
 .cache/
 .local/
 
-# local env files
+# Environment and log files
 .env
 .env.*
-!.env.example
-
-# logs
 *.log
-
-# lockfiles
-package-lock.json
-

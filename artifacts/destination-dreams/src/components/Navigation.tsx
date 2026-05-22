@@ -16,6 +16,9 @@ export function Navigation({ coupleName }: NavigationProps) {
     { href: '#hero', label: 'Home' },
     { href: '#story', label: 'Story' },
     { href: '#itinerary', label: 'Itinerary' },
+    { href: '#family', label: 'Family' },
+    { href: '#gallery', label: 'Gallery' },
+    { href: '#blessings', label: 'Blessings' },
     { href: '#rsvp', label: 'RSVP' },
     { href: '#destination', label: 'Venue' },
     { href: '#contact', label: 'Contact' }
@@ -61,7 +64,7 @@ export function Navigation({ coupleName }: NavigationProps) {
             <span className="text-[12px] text-primary">✦</span>
           </a>
           
-          <div className="hidden md:flex gap-8 text-xs tracking-[0.2em] uppercase font-medium">
+          <div className="hidden md:flex gap-4 lg:gap-6 xl:gap-8 text-[11px] lg:text-xs tracking-[0.15em] lg:tracking-[0.2em] uppercase font-medium">
             {links.map(link => (
               <a 
                 key={link.href} 
@@ -111,7 +114,7 @@ export function Navigation({ coupleName }: NavigationProps) {
               </button>
             </div>
             
-            <div className="flex flex-col gap-8 text-2xl font-serif text-center flex-1 justify-center relative z-10">
+            <div className="flex flex-col gap-5 md:gap-8 text-xl md:text-2xl font-serif text-center flex-1 justify-center relative z-10">
               {links.map((link, i) => (
                 <motion.a
                   key={link.href}

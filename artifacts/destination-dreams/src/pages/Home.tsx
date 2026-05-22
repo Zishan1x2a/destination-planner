@@ -44,7 +44,7 @@ export default function Home() {
       <AnimatePresence>
         {showContent && (
           <motion.div
-            className={`relative bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground overflow-x-hidden ${!invitationOpened ? 'h-[100dvh] overflow-y-hidden' : 'min-h-[100dvh]'}`}
+            className={`relative bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground overflow-x-hidden no-scrollbar ${!invitationOpened ? 'h-[100dvh] overflow-y-hidden' : 'min-h-[100dvh]'}`}
             initial={{ opacity: 0, scale: 1.03 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
@@ -74,7 +74,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 100 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                  className="relative z-10 pt-24 min-h-screen" 
+                  className="relative z-10 pt-0 min-h-screen" 
                 >
                   <div id="hero" className="absolute top-0" /> {/* Anchor for 'Home' nav link */}
                   

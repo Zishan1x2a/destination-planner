@@ -145,7 +145,7 @@ export function CoupleRevealSection({ brideName, groomName }: CoupleRevealSectio
       id="couple"
       className="relative w-full overflow-hidden flex flex-col items-center justify-center"
       style={{
-        minHeight: "100vh",
+        minHeight: "80vh",
         position: "relative",
         background:
           "linear-gradient(180deg, hsl(25 30% 4%) 0%, hsl(28 28% 9%) 40%, hsl(25 30% 6%) 100%)",
@@ -174,7 +174,7 @@ export function CoupleRevealSection({ brideName, groomName }: CoupleRevealSectio
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-20 w-full max-w-6xl mx-auto px-4 pt-20 pb-16 flex flex-col items-center">
+      <div className="relative z-20 w-full max-w-6xl mx-auto px-4 pt-14 pb-16 flex flex-col items-center">
 
         {/* Top eyebrow */}
         <motion.p
