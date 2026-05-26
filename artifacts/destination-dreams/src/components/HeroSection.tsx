@@ -195,11 +195,11 @@ export function HeroSection({ coupleName, weddingDate, destination, onOpen, isOp
         {!isOpened ? (
           <button 
             onClick={onOpen}
-            className="group relative px-10 py-3.5 bg-[#FCF6BA]/10 hover:bg-[#FCF6BA]/20 border border-[#FCF6BA]/60 text-[#FCF6BA] transition-all duration-300 rounded-full flex items-center justify-center gap-3 backdrop-blur-md overflow-hidden cursor-pointer"
+            className="group relative px-6 md:px-10 py-3 md:py-3.5 bg-[#FCF6BA]/10 hover:bg-[#FCF6BA]/20 border border-[#FCF6BA]/60 text-[#FCF6BA] transition-all duration-300 rounded-full flex items-center justify-center gap-3 backdrop-blur-md overflow-hidden cursor-pointer whitespace-nowrap"
             style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.5), inset 0 0 15px rgba(252,246,186,0.2)" }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FCF6BA]/30 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-            <span className="font-serif italic tracking-[0.15em] text-lg font-medium" style={{ textShadow: "0 2px 4px rgba(0,0,0,0.8)" }}>Open Invitation</span>
+            <span className="font-serif italic tracking-[0.15em] text-base md:text-lg font-medium whitespace-nowrap" style={{ textShadow: "0 2px 4px rgba(0,0,0,0.8)" }}>Open Invitation</span>
           </button>
         ) : (
           <motion.div 
