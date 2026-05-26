@@ -148,5 +148,33 @@ export const MOCK_WEDDING_CONFIG = {
       category: "decor",
       caption: "Glimmering Palace Lighting"
     }
-  ]
+  ],
+  rsvp: {
+    rsvpType: "detailed",
+    allowEditRsvp: true,
+    form: {
+      fields: [
+        { 
+          id: "guestCount", 
+          type: "number", 
+          label: "Number of Guests", 
+          placeholder: "e.g. 2", 
+          required: true 
+        },
+        { 
+          id: "arrivalTime", 
+          type: "time", 
+          label: "Expected Arrival Time", 
+          required: false 
+        },
+        { 
+          id: "mealPreference", 
+          type: "select", 
+          label: "Meal Preference", 
+          options: ["Veg", "Jain", "Non-Veg"], 
+          required: false 
+        }
+      ]
+    }
+  }
 };
