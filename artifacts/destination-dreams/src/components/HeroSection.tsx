@@ -69,7 +69,7 @@ export function HeroSection({ coupleName, weddingDate, destination, onOpen, isOp
         <CornerOrnament position="br" color="hsl(var(--primary))" size={80} />
       </motion.div>
 
-      <div className="relative z-20 text-center px-6 max-w-4xl mx-auto -translate-y-8 md:-translate-y-12">
+      <div className="relative z-20 text-center px-6 max-w-4xl mx-auto -translate-y-16 sm:-translate-y-12 md:-translate-y-12">
         <div className="flex flex-col items-center">
           {/* Ganesha Image Container with Divine Halo Effect */}
           <div className="relative mb-4 flex items-center justify-center w-36 h-36 md:w-44 md:h-44">
@@ -176,11 +176,11 @@ export function HeroSection({ coupleName, weddingDate, destination, onOpen, isOp
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2.2 }}
-            className="border border-[#FCF6BA]/60 bg-black/40 backdrop-blur-sm px-8 py-3 rounded-[40px] flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm md:text-lg font-serif italic text-[#FCF6BA]/90"
+            className="border border-[#FCF6BA]/60 bg-black/40 backdrop-blur-sm px-5 md:px-8 py-2 md:py-3 rounded-[40px] flex flex-row items-center justify-center gap-2 md:gap-8 text-[11px] sm:text-sm md:text-lg font-serif italic text-[#FCF6BA]/90 whitespace-nowrap"
             style={{ textShadow: "0 2px 4px rgba(0,0,0,0.8)" }}
           >
             <span>{weddingDate}</span>
-            <span className="hidden md:block w-1.5 h-1.5 rounded-full bg-[#FCF6BA]/60" style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.8)" }} />
+            <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#FCF6BA]/60" style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.8)" }} />
             <span>{destination}</span>
           </motion.div>
         </div>
